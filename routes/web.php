@@ -29,8 +29,12 @@ Route::post('/register', 'Auth\RegisterController@register');
 Route::get('/added', 'Auth\RegisterController@added');
 Route::post('/added', 'Auth\RegisterController@added');
 
+//追加
+//Route::get('auth/register','Auth\RegisterController@showRegisterationForm');
+//Route::post('auth/register','Auth\RegisterController@register');
+
 //ログイン中のページ
-Route::get('/top','PostsController@index');
+Route::post('/index','PostsController@index');
 
 Route::get('/profile','UsersController@profile');
 
