@@ -42,6 +42,12 @@ class RegisterController extends Controller
     public function register(Request $request){
         if($request->isMethod('post')){
 
+            //バリデーション
+            $request->validate([
+              'username' => 'required|unique:users,username|min:2, max:12',
+              'mail' => 'required|unique:users,username|min:5, max:40', //途中
+        ]);
+
             $username = $request->input('username');
             $mail = $request->input('mail');
             $password = $request->input('password');
