@@ -44,8 +44,9 @@ class RegisterController extends Controller
 
             //バリデーション
             $request->validate([
-              'username' => 'required|unique:users,username|min:2, max:12',
-              'mail' => 'required|unique:users,username|min:5, max:40', //途中
+              'username' => 'required|min:2|max:12',
+              'mail' => 'required|unique:users,mail|email|min:5|max:40',
+              'password' => 'required|regex:/^[A-Za-z0-9]+$/u|min:8|max:20','confirmed',
         ]);
 
             $username = $request->input('username');

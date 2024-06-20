@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Here is where you can register(ここは登録することができる)web★
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -20,8 +21,12 @@
 
 
 //ログアウト中のページ
-Route::get('/login', 'Auth\LoginController@login');
-Route::post('/login', 'Auth\LoginController@login');
+//Route::group(['middleware' => 'auth'], function() { //追加04
+//'verified'!?
+//Route::get('/', function(){return redirect('/login');});
+
+Route::get('/login', 'Auth\LoginController@login')->name('login'); //必要(name属性追加!?)
+Route::post('/login', 'Auth\LoginController@login');//->name('login'); //必要(name属性追加!?)
 
 Route::get('/register', 'Auth\RegisterController@register');
 Route::post('/register', 'Auth\RegisterController@register');
@@ -29,11 +34,14 @@ Route::post('/register', 'Auth\RegisterController@register');
 Route::get('/added', 'Auth\RegisterController@added');
 Route::post('/added', 'Auth\RegisterController@added');
 
-//追加
-//Route::get('auth/register','Auth\RegisterController@showRegisterationForm');
-//Route::post('auth/register','Auth\RegisterController@register');
+//}); //追加04
 
 //ログイン中のページ
+Route::group(['middleware' => 'auth'], function() { //追加04
+//'verified'!?
+//Route::get('/', function(){return redirect('/login');});
+
+Route::get('/index','PostsController@index'); //追加04
 Route::post('/index','PostsController@index');
 
 Route::get('/profile','UsersController@profile');
@@ -42,3 +50,10 @@ Route::get('/search','UsersController@index');
 
 Route::get('/follow-list','PostsController@index');
 Route::get('/follower-list','PostsController@index');
+
+//Route::get('/login', 'Auth\LoginController@login')->name('login'); //追加04
+
+//追加04 ログアウト
+Route::get('/logout', 'Auth\LoginController@logout');
+
+}); //追加04
