@@ -20,6 +20,8 @@
     <link rel="apple-touch-icon-precomposed" href="画像のURL" />
     <!--OGPタグ/twitterカード-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script><!-- Bootstrap -->
+    <!--<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>-->
+    <script src="{{ asset('js/app.js') }}"></script> <!-- jQuery -->
 </head>
 <body>
     <header>
@@ -28,12 +30,22 @@
             <div id="">
                 <div id="">
                     <p>〇〇さん<img src="images/arrow.png"></p>
-                <div>
-                <ul>
+
+                    <!-- メニュー -->
+                    <div class="menu">
+                    <!--<span class="inn"></span>-->
+                    <!--V-->
+                    </div>
+                    <nav>
+                    <ul">
                     <li><a href="/top">ホーム</a></li>
                     <li><a href="/profile">プロフィール</a></li>
                     <li><a href="/logout">ログアウト</a></li>
-                </ul>
+                    </ul>
+                    </nav>
+                    <!-- /メニュー -->
+
+                </div>
             </div>
         </div>
     </header>
@@ -48,19 +60,19 @@
                 <p>フォロー数</p>
                 <p>〇〇名</p>
                 </div>
-                <p class="btn"><a href="">フォローリスト</a></p>
+                <p class="btn"><a href="/follow-list">フォローリスト</a></p>
                 <div>
                 <p>フォロワー数</p>
                 <p>〇〇名</p>
                 </div>
-                <p class="btn"><a href="">フォロワーリスト</a></p>
+                <p class="btn"><a href="/follower-list">フォロワーリスト</a></p>
             </div>
-            <p class="btn"><a href="">ユーザー検索</a></p>
+            <p class="btn"><a href="/search">ユーザー検索</a></p>
         </div>
     </div>
     <footer>
     </footer>
-    <script src="JavaScriptファイルのURL"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
     <script src="JavaScriptファイルのURL"></script>
 </body>
 </html>

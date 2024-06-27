@@ -1,10 +1,123 @@
 @charset "UTF-8";
 
 html {
-    height: 100%;
+    /* height: 100%; */
 }
 
 body {
-    height: 100%;
-    background: linear-gradient(180deg, #186AC9, #ffff00 150%);
+    /*
+    background-color: #186AC9;
+    background-image: linear-gradient(180deg, #186AC9 0%, #fee32d 100%);
+    */
+
+    background: #186AC9;
+    background: linear-gradient(to bottom, #186AC9 30%, #fee32d 100%);
+    text-align: center;
+    color: #fff;
+    margin-top: 130px;
+}
+
+/* 0067c6,ffff00*/
+
+a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+h1 img {
+    width: 150px;
+}
+
+.sub-title {
+    margin: 0;
+    font-size: 40px;
+}
+
+.container-frame {
+    display: flex;
+    flex-flow: column;
+    margin: 0 auto;
+    height: 700px;
+}
+
+.container-frame-top {
+    margin: auto;
+}
+
+.container-frame-bottom {
+    margin: auto auto 10% auto;
+}
+
+#container {
+    align-items: center;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.1);
+    width: 350px;
+    border-radius: 10px;
+}
+
+/*
+#container p {
+    font-size: 25px;
+}
+*/
+
+#container h2 {
+    font-weight: normal;
+    font-size: 25px;
+}
+
+label {
+    display: block;
+    text-align: left;
+    font-size: 18px;
+    text-transform: lowercase;
+}
+
+input {
+    display: block;
+    height: 45px;
+    width: 290px;
+    border-radius: 10px;
+    border: 1px;
+    margin-bottom: 20px;
+}
+
+.login-welcome {
+    font-size: 25px;
+}
+
+.btn {
+    margin: 0 auto 50px 50%;
+    width: 150px;
+    font-size: 20px;
+}
+
+.back a {
+    font-size: 25px;
+}
+
+/* added */
+
+.add-name {
+    font-size: 25px;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+.add-welcome {
+    font-weight: 500;
+    font-size: 20px;
+    margin-bottom: 40px;
+}
+
+.add-message {
+    font-size: 20px;
+    margin-bottom: 0;
+}
+
+.add-btn {
+    margin: 30px auto 0 -100%;
 }
