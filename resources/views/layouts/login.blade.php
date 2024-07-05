@@ -25,28 +25,35 @@
 </head>
 <body>
     <header>
+        <div class="header-wrapper">
         <div id = "head">
-        <h1><a href="/index"><img src="images/atlas.png"></a></h1>
-            <div id="">
-                <div id="">
-                    <p>〇〇さん<img src="images/arrow.png"></p>
+        <div class="header-logo"><h1><a href="/index"><img src="images/atlas.png"></a></h1></div>
+        <div id="">
+        <div id="">
+
+                    <!-- ヘッダー右 -->
+                    <!-- <p>〇〇さん<img src="images/arrow.png"></p> ←ここでまとめておいたほうがいい可能性ある!?-->
+                    <div class="header-menu-name"><p>〇〇さん</p></div>
 
                     <!-- メニュー -->
-                    <div class="menu">
+                    <div class="menu"></div>
                     <!--<span class="inn"></span>-->
                     <!--V-->
-                    </div>
+
                     <nav>
                     <ul">
-                    <li><a href="/top">ホーム</a></li>
+                    <li><a href="/index">ホーム</a></li>
                     <li><a href="/profile">プロフィール</a></li>
                     <li><a href="/logout">ログアウト</a></li>
                     </ul>
                     </nav>
                     <!-- /メニュー -->
 
-                </div>
-            </div>
+                    <div class="header-userimg"><img src="images/icon1.png" alt=""></div>
+            <!-- /ヘッダー右 -->
+
+        </div>
+        </div>
         </div>
     </header>
     <div id="row">
@@ -58,12 +65,14 @@
                 <p>〇〇さんの</p>
                 <div>
                 <p>フォロー数</p>
-                <p>〇〇名</p>
+                <p>〇名</p>
+  <p></p>
                 </div>
                 <p class="btn"><a href="/follow-list">フォローリスト</a></p>
+                <!--{{url('follow-list')}}-->
                 <div>
                 <p>フォロワー数</p>
-                <p>〇〇名</p>
+                <p>〇名</p>
                 </div>
                 <p class="btn"><a href="/follower-list">フォロワーリスト</a></p>
             </div>

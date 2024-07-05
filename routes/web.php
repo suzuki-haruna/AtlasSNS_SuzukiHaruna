@@ -44,12 +44,17 @@ Route::group(['middleware' => 'auth'], function() { //追加04
 Route::get('/index','PostsController@index'); //追加04
 Route::post('/index','PostsController@index');
 
+Route::get('/index','FollowsController@follow'); //追加
+
 Route::get('/profile','UsersController@profile');
 
 Route::get('/search','UsersController@search');
 
-Route::get('/follow-list','PostsController@index');
-Route::get('/follower-list','PostsController@index');
+Route::get('/follow-list','FollowsController@followList');
+Route::get('/follower-list','FollowsController@followerList');
+/*Route::get('/follow-list', function(){
+  return view('follow-list');
+});*/
 
 //Route::get('/login', 'Auth\LoginController@login')->name('login'); //追加04
 

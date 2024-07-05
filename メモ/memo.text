@@ -1,4 +1,4 @@
-ああ/abc@jp/aaaaaaaa
+ID61/ああ/abc@jp/aaaaaaaa
 
 ■GET&POST
 □GET:見える。ページを「取得」するためのリクエスト。画面表示のために必要なパラメーターは「GET」（表示したい商品や動画のID、ページ番号など）
@@ -20,3 +20,10 @@
 □global<グローバル>とは、全世界の、地球全体の、全体的な、広範囲の、などの意味を持つ英単語。ITの分野では、「系全体の」という意味で用いられることが多い。具体的な範囲は分野や対象により異なる。対義語は「ローカル」（local）あるいは「プライベート」（private）。
 □hoge<ホゲ>特に意味がない、何を入れてもかまわない。
 □web<>World Wide Web<ワールド ワイド ウェブ>
+
+https://www.ritolab.com/
+
+フォローフォロワー数login.blade.php内
+@foreach($follows as $d)
+<p>{{$d->following_id}}</p>
+@endforeach

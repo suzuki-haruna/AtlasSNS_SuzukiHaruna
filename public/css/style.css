@@ -9,6 +9,20 @@ header {
     background: #186AC9;
 }
 
+.header-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+}
+
+.header-logo {}
+
+.header-menu-name {}
+
+.menu {}
+
+.header-userimg {}
+
 /* main content */
 #row {
     display: flex;
