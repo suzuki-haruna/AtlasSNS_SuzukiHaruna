@@ -46,7 +46,13 @@ Route::post('/index','PostsController@index');
 
 Route::get('/index','FollowsController@follow'); //追加
 
-Route::get('/profile','UsersController@profile');
+//Route::get('/profile','UsersController@profile')
+Route::get('/profile','UsersController@profile')->name('profile');
+Route::put('/profile', 'UserController@profileUpdate')->name('profile_edit');
+Route::post('profile/{id}/update','UsersController@update');
+//Route::post('/profile', 'UserController@profile');
+//追加 プロフィール編集
+//Route::put('/password_change', 'UserController@passwordUpdate')->name('password_edit'); //追加 パスワード編集
 
 Route::get('/search','UsersController@search');
 

@@ -1,4 +1,5 @@
 ID61/ああ/abc@jp/aaaaaaaa
+ID66/あい/abb@jp/aaaaaaaa
 
 ■GET&POST
 □GET:見える。ページを「取得」するためのリクエスト。画面表示のために必要なパラメーターは「GET」（表示したい商品や動画のID、ページ番号など）
