@@ -6,13 +6,14 @@ body {}
 
 /* header */
 header {
+    /*display: flex;*/
     background: #186AC9;
 }
 
 .header-wrapper {
     display: flex;
-    justify-content: flex-end;
-    flex-direction: row;
+    /*justify-content: flex-end;*/
+    /*flex-direction: row;*/
 }
 
 .header-logo {}

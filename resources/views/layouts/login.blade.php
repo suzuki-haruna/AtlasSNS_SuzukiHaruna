@@ -23,39 +23,40 @@
     <!--<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>-->
     <script src="{{ asset('js/app.js') }}"></script> <!-- jQuery -->
 </head>
+
 <body>
     <header>
-        <div class="header-wrapper">
-        <div id = "head">
-        <div class="header-logo"><h1><a href="/index"><img src="images/atlas.png"></a></h1></div>
-        <div id="">
-        <div id="">
 
-                    <!-- ヘッダー右 -->
-                    <!-- <p>〇〇さん<img src="images/arrow.png"></p> ←ここでまとめておいたほうがいい可能性ある!?-->
-                    <div class="header-menu-name"><p>〇〇さん</p></div>
+            <div id = "head">
+                <div class="header-wrapper">
+                <div class="header-logo"><h1><a href="/index"><img src="images/atlas.png"></a></h1></div>
+                    <div id=""></div>
+                        <div id=""></div>
 
-                    <!-- メニュー -->
-                    <div class="menu"></div>
-                    <!--<span class="inn"></span>-->
-                    <!--V-->
+                        <!-- ヘッダー右 -->
+                        <!-- <p>〇〇さん<img src="images/arrow.png"></p> ←ここでまとめておいたほうがいい可能性ある!?-->
+                        <div class="header-menu-name"><p>〇〇さん</p></div>
 
-                    <nav>
-                    <ul">
-                    <li><a href="/index">ホーム</a></li>
-                    <li><a href="/profile">プロフィール</a></li>
-                    <li><a href="/logout">ログアウト</a></li>
-                    </ul>
-                    </nav>
-                    <!-- /メニュー -->
+                        <!-- メニュー -->
+                        <div class="menu"></div>
+                        <!--<span class="inn"></span>-->
+                        <!--V-->
 
-                    <div class="header-userimg"><img src="images/icon1.png" alt=""></div>
-            <!-- /ヘッダー右 -->
+                        <nav>
+                        <ul">
+                        <li><a href="/index">ホーム</a></li>
+                        <li><a href="/profile">プロフィール</a></li>
+                        <li><a href="/logout">ログアウト</a></li>
+                        </ul>
+                        </nav>
+                        <!-- /メニュー -->
 
-        </div>
-        </div>
+                        <div class="header-userimg"><img src="{{ asset('storage/'.Auth::user()->images) }}"></div>
+                        <!-- /ヘッダー右 -->
+            </div>
         </div>
     </header>
+
     <div id="row">
         <div id="container">
             @yield('content')
@@ -66,7 +67,7 @@
                 <div>
                 <p>フォロー数</p>
                 <p>〇名</p>
-  <p></p>
+                <p></p>
                 </div>
                 <p class="btn"><a href="/follow-list">フォローリスト</a></p>
                 <!--{{url('follow-list')}}-->
@@ -79,6 +80,7 @@
             <p class="btn"><a href="/search">ユーザー検索</a></p>
         </div>
     </div>
+
     <footer>
     </footer>
     <script src="{{ asset('js/script.js') }}"></script>

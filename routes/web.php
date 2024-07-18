@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\PostsController; //PostsControllerを読み込み
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,9 +14,13 @@
 */
 //Here is where you can register(ここは登録することができる)web★
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+// Route::①('②','③');
+/*
+①HTTP上の通信方法(POST,GET)
+②どのURLで表示するか
+③どのメソッド(または関数)とつなげるか
+*/
+
 // Route::get('/home', 'HomeController@index')->name('home');
 
 //Auth::routes();
@@ -42,14 +48,20 @@ Route::group(['middleware' => 'auth'], function() { //追加04
 //Route::get('/', function(){return redirect('/login');});
 
 Route::get('/index','PostsController@index'); //追加04
-Route::post('/index','PostsController@index');
+Route::post('/index','PostsController@postCreate');//POST通信でPostsControllerのpostCreateメソッドとつなげる
+//Route::post('/index','PostsController@index'); //POST通信でPostsControllerのindexメソッドとつなげる
+//Route::post('/create','PostsController@postCreate');
+//Route::get('/index', [PostController::class, 'index'])->name('index'); //posts.index
+//Route::resource('/index', PostsController::class);//CRUD機能に必要なアクションをすべて作ったので、ルートもresourceを使用
 
 Route::get('/index','FollowsController@follow'); //追加
 
 //Route::get('/profile','UsersController@profile')
+
 Route::get('/profile','UsersController@profile')->name('profile');
 Route::put('/profile', 'UserController@profileUpdate')->name('profile_edit');
 Route::post('profile/{id}/update','UsersController@update');
+
 //Route::post('/profile', 'UserController@profile');
 //追加 プロフィール編集
 //Route::put('/password_change', 'UserController@passwordUpdate')->name('password_edit'); //追加 パスワード編集

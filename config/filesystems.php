@@ -67,4 +67,9 @@ return [
 
     ],
 
+    // 追加 画像ストレージ
+    'links' => [
+            public_path('storage') => storage_path('app/public'),
+        ],
+
 ];
