@@ -19,6 +19,12 @@ class CreateFollowsTable extends Migration
             $table->integer('followed_id');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->default(DB::raw('current_timestamp on update current_timestamp'));
+
+            //追加 外部キー制約
+            /*$table->foreign('following_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('followed_id')->references('id')->on('users')->onDelete('cascade');
+            //following_idとfollowed_idの組み合わせの重複を許さない
+            $table->unique(['following_id', 'followed_id']);*/
         });
     }
 

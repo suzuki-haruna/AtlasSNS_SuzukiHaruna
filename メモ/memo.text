@@ -1,11 +1,6 @@
 ID61/ああ/abc@jp/aaaaaaaa
 ID66/あい/abb@jp/aaaaaaaa
 
-■GET&POST
-□GET:見える。ページを「取得」するためのリクエスト。画面表示のために必要なパラメーターは「GET」（表示したい商品や動画のID、ページ番号など）
-□POST見えない。情報を「送信」するためのリクエスト。ユーザーが画面に入力して送信するパラメーターは「POST」（ログインIDや個人情報など）
-□なお、検索フォームは<form>タグを使うので、POST方式にしがちですが、この場合はあえてGET方式にします。
-■namespace：名前空間(フォルダーのようなイメージ)。namespaceで定義されたものを使うにはuse、つまりインポートという機能を使う。
 ■アクセス修飾子
 □public：どこからでもアクセス可能です。アクセス修飾子がない場合は、publicを指定したものと同じになります。
 □protected：そのクラス自身と継承クラスからアクセス可能です。つまり非公開ですが、継承は可能となります。
@@ -52,3 +47,41 @@ https://www.ritolab.com/
   </tr>
 @endforeach
 </table>
+
+<!--            @if (follows()->following_id()->follows($user->id))
+  <form action="/users/{{ $user->id }}/unfollow" method="post">
+    @csrf
+    <input type="submit" name="button" class="followButton" value="フォロー解除">
+  </form>
+  @else
+  <form action="/users/{{ $user->id }}/follow" method="post">
+    @csrf
+    <input type="submit" name="follow" class="followButton" value="フォローする">
+  </form>
+  @endif-->
+
+  //フォローフォロワー
+    /*public function follow(User $user){
+    $follow = FollowUser::create([
+            'following_id' => \Auth::user()->id, //認証ユーザー＝フォローユーザー
+            'followed_id' => $user->id, //相手のIDを$user->idで取得できるようにしておく
+        ]);
+        $followCount = count(FollowUser::where('followed_id', $user->id)->get()); //フォローされているユーザーの数をcountして取得
+        return response()->json(['followCount' => $followCount]);
+    }
+
+        public function unfollow(User $user) { //インスタンスを取得して削除する機能
+        $follow = FollowUser::where('following_id', \Auth::user()->id)->where('followed_id', $user->id)->first();
+        $follow->delete();
+        $followCount = count(FollowUser::where('followed_id', $user->id)->get());
+
+        return response()->json(['followCount' => $followCount]);
+        }*/
+
+        //フォローフォロワーfollophp
+    /*protected $fillable = ['following_id', 'followed_id'];
+    protected $table = 'follows'; //テーブル名を定義
+
+    public function index(){
+        return view('follows.followsList');
+    }*/

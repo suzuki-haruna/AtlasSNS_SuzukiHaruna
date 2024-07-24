@@ -59,3 +59,8 @@ nav {
     /* 開いている時 */
     content: "∧";
 }
+
+/* 検索 */
+.search {
+    display: flex;
+}

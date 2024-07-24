@@ -12,7 +12,7 @@ use App\Http\Controllers\PostsController; //PostsControllerを読み込み
 | contains the "web" middleware group. Now create something great!
 |
 */
-//Here is where you can register(ここは登録することができる)web★
+//Here is where you can register(ここは登録することができる)web
 
 // Route::①('②','③');
 /*
@@ -20,8 +20,7 @@ use App\Http\Controllers\PostsController; //PostsControllerを読み込み
 ②どのURLで表示するか
 ③どのメソッド(または関数)とつなげるか
 */
-
-// Route::get('/home', 'HomeController@index')->name('home');
+//★
 
 //Auth::routes();
 
@@ -67,6 +66,9 @@ Route::post('profile/{id}/update','UsersController@update');
 //Route::put('/password_change', 'UserController@passwordUpdate')->name('password_edit'); //追加 パスワード編集
 
 Route::get('/search','UsersController@search');
+Route::post('/search','UsersController@search');
+
+
 
 Route::get('/follow-list','FollowsController@followList');
 Route::get('/follower-list','FollowsController@followerList');

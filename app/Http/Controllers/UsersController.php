@@ -33,9 +33,24 @@ class UsersController extends Controller
     }
  }
 
+    //【検索】
+    //ユーザー一覧
+    /*public function search(){
+        $users = User::get(); //Userモデル(usersテーブル)からレコード情報を取得
+        return view('users.search',['users'=>$users]); //viewヘルパ(指定したphpファイルを画面に表示する)
+    }*/
 
-    public function search(){
-        return view('users.search');
+    //検索機能
+    public function search(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        if(!empty($keyword)){
+             $users = User::where('username','like', '%'.$keyword.'%')->get();
+        }else{
+             $users = User::all();
+        }
+        return view('users.search')->with(['users'=>$users,'keyword'=>$keyword
+        ]);
     }
 
     //追加 プロフィール編集機能

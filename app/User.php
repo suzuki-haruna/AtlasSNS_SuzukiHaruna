@@ -1,9 +1,10 @@
 <?php
 
-namespace App;
+namespace App; //★
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth; //追加 フォローフォロワー
 use Illuminate\Database\Eloquent\Model; //追加 プロフィール編集
 //use Illuminate\Support\Facades\Hash; //ハッシュ追加
 
