@@ -1,14 +1,6 @@
 ID61/ああ/abc@jp/aaaaaaaa
 ID66/あい/abb@jp/aaaaaaaa
 
-■アクセス修飾子
-□public：どこからでもアクセス可能です。アクセス修飾子がない場合は、publicを指定したものと同じになります。
-□protected：そのクラス自身と継承クラスからアクセス可能です。つまり非公開ですが、継承は可能となります。
-□private：同じクラスの中でのみアクセス可能です。非公開で継承クラスからもアクセス不可能となります。
-
-■記号
-□{{ }} 二重波括弧：PHPのecho(値を表示する関数)と同じ働きをする。{{}}を使うとその値をエスケープして出力することができる。セキュリティ対策(XSS)。
-
 ■単語
 □added<アディド>addの過去形、または過去分詞。(…を)(他のものに)加える、追加する。
 □authenticate<オーセンティケーション>認証する。
@@ -85,3 +77,90 @@ https://www.ritolab.com/
     public function index(){
         return view('follows.followsList');
     }*/
+
+FollowsControllerとUser.phpとsearch.bladeが主にいじっているところです。
+
+①ユーザーごとに「フォローする」ボタンと「フォロー解除」ボタンを付ける。
+②「フォローする」ボタンを押した場合はfollowsテーブルにレコードが追加され、「フォロー解除」ボタンを押した場合はそのレコードを削除する。
+③フォローしているかどうか判断するメソッドを用意しusersテーブルとfollowsテーブルをリレーションする。
+④上記メソッドを使用し、フォローしていなければフォローするボタンを、フォローしていればフォロー解除ボタンを表示するように条件を分ける。
+
+まずは上記の①②を実装してみてください！！
+②のレコードの追加はつぶやきの登録を参考に、レコードの削除はつぶやきの削除を参考にしてみてください！
+
+③④は下記サイトを参考に進めてみてください！
+https://qiita.com/namizatork/items/0c81b0a94a1084cda6de
+
+//追加 フォロー
+    public function users()
+    {
+        return $this->belongsToMany('App\User'); //userに属するuserを取得
+    }
+
+                    <!--@if(in_array($user->id,Auth::user()->follow_each()))-->
+
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+use App\Follow; //追加
+use App\User;
+use App\Post;
+use Illuminate\Support\Facades\Auth; // Auth(認証)ファサードを読み込む
+use Illuminate\Support\Facades\DB; //DB接続に必要なクラスをインポートする
+
+class FollowsController extends Controller
+{
+    public function followList(){
+        return view('follows.followList');
+    }
+    public function followerList(){
+        return view('follows.followerList');
+    }
+
+    //追加 フォロー
+    public function follow(User $user){
+        $follower = Auth::User();
+        $is_following = $follower->isFollowing($user->id); //フォローしているか
+        if(!$is_following){
+            $follower->follow($user->id); //フォローしていなければフォローする
+        return back(); //直前のページにリダイレクト
+        }
+    }
+    /*public function follow(Request $request){
+        $data = [
+            'user'=>'$user->id',
+        ];
+        return view('users.search');
+    }*/
+    /*public function create(Request $request) {
+        $param = [
+            'follow' => $request->$user->id, //取得したいデータをinput要素のname属性
+        ];
+        //DBに接続しデータを挿入する。第１パラメータにSQL文、第２に$paramを。
+        DB::insert('insert into reviews (following_id, followed_id) values (:$user->id, :$user->id, NOW())', $param);
+        return redirect('users.search');
+    }*/
+
+    //フォロー解除
+    public function unfollow(User $user){
+        $follower = auth()->user();
+        $is_following = $follower->isFollowing($user->id); //フォローしているか
+        if($is_following){
+            $follower->unfollow($user->id); //フォローしていれば解除する
+            return back(); //直前のページにリダイレクト
+        }
+    }
+
+    //フォローフォロワー数//★
+    //〇$fw = new Follow(); // Followモデルのインスタンス化
+    //〇$follows = $fw->getData();
+    //$follows = DB::table('follows')->get();
+    //〇return view('posts.index', ['follows' => $follows]);
+    //}
+    //posts.index follow.index
+    /*■FollowsControllerのfollowメソッドにif文を追記する。
+    もしフォローしていなければフォローするというif文を追記してみましょう。
+    User.phpに記載してあるisFollowingメソッドを使用していきます。*/

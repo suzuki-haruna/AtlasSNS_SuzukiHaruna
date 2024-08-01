@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 
 //追加 プロフィール編集
 use Illuminate\Support\Facades\Auth;
-use App\User;
 use Illuminate\Validation\Rule;
+use App\User;
 
 class UsersController extends Controller
 {
-    //
+    //★
     public function profile(){
         $user = Auth::user();
         return view('users.profile', ['user' => $user]);
@@ -41,8 +41,7 @@ class UsersController extends Controller
     }*/
 
     //検索機能
-    public function search(Request $request)
-    {
+    public function search(Request $request){
         $keyword = $request->input('keyword');
         if(!empty($keyword)){
              $users = User::where('username','like', '%'.$keyword.'%')->get();
@@ -51,10 +50,20 @@ class UsersController extends Controller
         }
         return view('users.search')->with(['users'=>$users,'keyword'=>$keyword
         ]);
-    }
 
-    //追加 プロフィール編集機能
-    public function profileUpdate(Request $request, $id/*, User $user*/){
+        //フォロー
+        //$user = $request->following_id; //新しいユーザーを生成しない場合、userのidだけrequestして送っても良い
+        //$user->users()->attach($followed_id); ////既存のユーザーのIDだけ送ったパターン
+
+        //$user->detach($followed_id); //狙った１つのタグだけを外したい
+        }
+        public function follow(Request $request, User $user){
+            $request->user()->follow($user->id);
+            return back();
+        }
+
+        //追加 プロフィール編集機能
+        public function profileUpdate(Request $request, $id/*, User $user*/){
 
         //バリデーション
             $request->validate([

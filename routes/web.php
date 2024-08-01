@@ -20,16 +20,8 @@ use App\Http\Controllers\PostsController; //PostsControllerを読み込み
 ②どのURLで表示するか
 ③どのメソッド(または関数)とつなげるか
 */
-//★
 
-//Auth::routes();
-
-
-//ログアウト中のページ
-//Route::group(['middleware' => 'auth'], function() { //追加04
-//'verified'!?
-//Route::get('/', function(){return redirect('/login');});
-
+//ログアウト中のページ//★
 Route::get('/login', 'Auth\LoginController@login')->name('login'); //必要(name属性追加!?)
 Route::post('/login', 'Auth\LoginController@login');//->name('login'); //必要(name属性追加!?)
 
@@ -68,13 +60,15 @@ Route::post('profile/{id}/update','UsersController@update');
 Route::get('/search','UsersController@search');
 Route::post('/search','UsersController@search');
 
-
-
 Route::get('/follow-list','FollowsController@followList');
 Route::get('/follower-list','FollowsController@followerList');
 /*Route::get('/follow-list', function(){
   return view('follow-list');
 });*/
+
+//フォロー
+Route::post('/users/{id}/follow','FollowsController@follow')->name('follow');
+Route::delete('/users/{id}/unfollow','FollowsController@unfollow')->name('unfollow');
 
 //Route::get('/login', 'Auth\LoginController@login')->name('login'); //追加04
 
