@@ -1,11 +1,13 @@
 <?php
 
+//フォロー機能：ここは多分完了。30行目のreturnは怪しい(index表示)
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
 use App\Follow; //追加
-use App\User;
+use App\User; //userモデルを使う
 use App\Post;
 use Illuminate\Support\Facades\Auth; // Auth(認証)ファサードを読み込む
 use Illuminate\Support\Facades\DB; //DB接続に必要なクラスをインポートする
@@ -38,4 +40,13 @@ class FollowsController extends Controller
             return back(); //直前のページにリダイレクト
         }
     }
+
+    //テスト
+    public function followsCreate(Request $request)
+    {
+        $name = $request->input('followId');
+        Follows::create(['following_id' => $following_id]);
+        return back();
+    }
 }
+//★

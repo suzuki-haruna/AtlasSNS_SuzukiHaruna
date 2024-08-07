@@ -14,6 +14,15 @@
           @endif
 </div>
 
+<!--テスト-->
+                {!! Form::open(['url' => '/follows/create']) !!}<!--フォームの値を送る-->
+                {{Form::token()}}<!--CSRFトークン-->
+                <div class="">
+                {{ Form::input('submit', 'followId', null, ['class' => 'form-control']) }}
+                </div>
+                <button type="submit" class="btn btn-success pull-right">テスト</button>
+                {!! Form::close() !!}
+
 <!-- ユーザー一覧 -->
         <table class="table table-hover">
             @foreach ($users as $user)
@@ -35,6 +44,7 @@
                 <td><!--<input type="button" name="follow">-->
                 <button type="submit" class="btn btn-primary">フォローする</button></td>
                 </form>
+
                 @endif
 
             </tr>

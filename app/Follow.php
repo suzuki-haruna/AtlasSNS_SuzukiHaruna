@@ -1,5 +1,7 @@
 <?php
 
+//フォロー機能：ここは多分触らなくていい
+
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
@@ -20,5 +22,10 @@ class Follow extends Model
     public function getData(){
        $follows = DB::table($this->table)->get();
        return $follows;
+    }
+
+    //テスト
+    public function follo(){
+        return $this->belongsTo('App\User');
     }
 }

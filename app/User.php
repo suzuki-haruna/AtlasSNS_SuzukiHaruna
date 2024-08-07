@@ -2,11 +2,12 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;//★
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+
 use Illuminate\Support\Facades\Auth; //追加 フォローフォロワー
-use Illuminate\Database\Eloquent\Model; //追加 プロフィール編集
-//use Illuminate\Support\Facades\Hash; //ハッシュ追加
+use Illuminate\Database\Eloquent\Model; //プロフィール編集
+//★
 
 //追加 プロフィール編集
 /*class User extends Model
@@ -27,6 +28,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'username', 'mail', 'password',
+        'following_id', 'followed_id' //テスト
     ];
 
     /**
@@ -91,4 +93,14 @@ class User extends Authenticatable
             'password'     => Hash::make($password), //ハッシュ
         ]);
     }*/
-}
+
+    //テスト
+    /*class User extends Model{
+    protected $fillable = [
+        'following_id', 'followed_id'
+    ];*/
+    //リレーション
+    public function follows(){
+        return $this->hasMany('App\Follow');
+    }
+    }

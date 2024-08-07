@@ -21,8 +21,8 @@ use App\Http\Controllers\PostsController; //PostsControllerを読み込み
 ③どのメソッド(または関数)とつなげるか
 */
 
-//ログアウト中のページ//★
-Route::get('/login', 'Auth\LoginController@login')->name('login'); //必要(name属性追加!?)
+//ログアウト中のページ
+Route::get('/login', 'Auth\LoginController@login')->name('login'); //必要(name属性追加)//★
 Route::post('/login', 'Auth\LoginController@login');//->name('login'); //必要(name属性追加!?)
 
 Route::get('/register', 'Auth\RegisterController@register');
@@ -45,7 +45,7 @@ Route::post('/index','PostsController@postCreate');//POST通信でPostsControlle
 //Route::get('/index', [PostController::class, 'index'])->name('index'); //posts.index
 //Route::resource('/index', PostsController::class);//CRUD機能に必要なアクションをすべて作ったので、ルートもresourceを使用
 
-Route::get('/index','FollowsController@follow'); //追加
+Route::get('/follow','FollowsController@follow'); //追加(一先ず/follow)
 
 //Route::get('/profile','UsersController@profile')
 
@@ -74,5 +74,8 @@ Route::delete('/users/{id}/unfollow','FollowsController@unfollow')->name('unfoll
 
 //追加04 ログアウト
 Route::get('/logout', 'Auth\LoginController@logout');
+
+//テスト
+Route::post('/follows/create','FollowsController@followsCreate');
 
 }); //追加04

@@ -11,20 +11,16 @@ use App\User;
 
 class UsersController extends Controller
 {
-    //★
     public function profile(){
         $user = Auth::user();
         return view('users.profile', ['user' => $user]);
     }
-    /*    public function profile(){
-        return view('users.profile');
-    } */
 
-    public function image(Request $request, User $user) {
+    public function image(Request $request, User $user){
 
-  $images = $request->images;
+    $images = $request->images;
 
-    if($images->isValid()) {
+    if($images->isValid()) { //★
       $filePath = $images->store('public');
       $user->images = str_replace('public/', '', $filePath);
       $user->save();
@@ -50,13 +46,12 @@ class UsersController extends Controller
         }
         return view('users.search')->with(['users'=>$users,'keyword'=>$keyword
         ]);
+        }
 
         //フォロー
         //$user = $request->following_id; //新しいユーザーを生成しない場合、userのidだけrequestして送っても良い
         //$user->users()->attach($followed_id); ////既存のユーザーのIDだけ送ったパターン
-
         //$user->detach($followed_id); //狙った１つのタグだけを外したい
-        }
         public function follow(Request $request, User $user){
             $request->user()->follow($user->id);
             return back();
