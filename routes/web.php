@@ -40,12 +40,13 @@ Route::group(['middleware' => 'auth'], function() { //追加04
 
 Route::get('/index','PostsController@index'); //追加04
 Route::post('/index','PostsController@postCreate');//POST通信でPostsControllerのpostCreateメソッドとつなげる
+//Route::get('/index','PostsController@show');
 //Route::post('/index','PostsController@index'); //POST通信でPostsControllerのindexメソッドとつなげる
 //Route::post('/create','PostsController@postCreate');
 //Route::get('/index', [PostController::class, 'index'])->name('index'); //posts.index
 //Route::resource('/index', PostsController::class);//CRUD機能に必要なアクションをすべて作ったので、ルートもresourceを使用
 
-Route::get('/follow','FollowsController@follow'); //追加(一先ず/follow)
+//Route::get('/follow','FollowsController@follow'); //追加(/indexではないものにする→一先ず/follow)
 
 //Route::get('/profile','UsersController@profile')
 
@@ -67,15 +68,16 @@ Route::get('/follower-list','FollowsController@followerList');
 });*/
 
 //フォロー
-Route::post('/users/{id}/follow','FollowsController@follow')->name('follow');
-Route::delete('/users/{id}/unfollow','FollowsController@unfollow')->name('unfollow');
+Route::post('users/{user}/follow','FollowsController@follow')->name('follow'); //{id}
+Route::delete('users/{user}/unfollow','FollowsController@unfollow')->name('unfollow');
+//動画
+//Route::get('/users/{id}', [App\Http\Controllers\UsersController::class, 'show'])->name('user.show');
 
 //Route::get('/login', 'Auth\LoginController@login')->name('login'); //追加04
 
+//Route::get('users/show','FollowsController@follow'); //追加(/indexではないものにする→一先ず/follow)
+
 //追加04 ログアウト
 Route::get('/logout', 'Auth\LoginController@logout');
-
-//テスト
-Route::post('/follows/create','FollowsController@followsCreate');
 
 }); //追加04

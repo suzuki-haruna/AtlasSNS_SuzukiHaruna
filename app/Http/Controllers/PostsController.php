@@ -5,30 +5,74 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth; //現在ログインしているユーザー獲得
-use App\user;
-use App\post; //postsテーブルのデータ獲得
+use App\User;
+use App\Post; //postsテーブルのデータ獲得
+use App\Follow;
 
 class PostsController extends Controller
 {
-    //
-    //中間テーブル
-    /* $user = User::find(1);
-        foreach ($user->users as $user) {
-        dd($user->pivot->quantity);
-    } */
-    /*public function postCounts(){
-    $posts = Post::get();
-    return view('login', compact('posts'));
-    }*/ //中間テーブル
+    // 【投稿】
+    /*public function index(){
+    $posts = Post::get();   // Postモデル経由でpostsテーブルのレコードを取得
+    return view('posts.index', compact('posts'));
+    }*/
 
-    public function index(){
+    // Auth認証
+    public function __construct(){
+    $this->middleware('auth');
+    }
+
+    public function index(Post $posts){//Post $posts, Follow $follows
+
+        /*$posts = Post::query()->whereIn('user_id', Auth::user()->follows()->pluck('followed_id'))->latest()->get();
+        return view('posts.index')->with([
+            'posts' => $posts,
+            ]);*/
+
+      /*$user = Auth::user();
+      $posts = Post::get();
+      $following_id = auth()->user()->follows()->pluck('followed_id');
+      $posts = Post::orderBy('created_at','desc')->with('user')->whereIn('user_id',$following_id)->orWhere('user_id',$user->id)->get();
+      return view('posts.index',['user'=>$user, 'posts'=>$posts]);*/
+
+$posts = User::select('users.username','posts.id','posts.post','posts.created_at')
+->join('posts','posts.user_id','=','users.id')
+->orderBy('created_at','desc')
+->get();
+
+/*$user = auth()->user();
+        $follow_ids = $follows->followingIds($user->id);
+        // followed_idだけ抜き出す
+        $following_ids = $follow_ids->pluck('followed_id')->toArray();
+
+        $posts = $tweet->getTimelines($user->id, $following_ids);
+
+        return view('posts.index', [
+            'user' => $user,
+            'post' => $posts
+        ]);*/
         //$posts = Post::all(); //データベース内のすべてのPostを取得し、post変数に代入
         //$posts = Post::get(); //Postモデル(postsテーブル)からレコード情報を取得
-        $list=Post::get(); //Postモデル(postsテーブル)からレコード情報を取得
-        return view('posts.index', ['list'=>$list]); //bladeへ帰す際にデータを送る
+//〇$list=Post::get(); //Postモデル(postsテーブル)からレコード情報を取得
+//〇return view('posts.index', ['list'=>$list]); //bladeへ帰す際にデータを送る
         //return view('posts/index', ['posts'=>$posts]);
         // 'posts'フォルダ内の'index'viewファイルを返す
         // その際にview内で使用する変数を代入します
+
+        // フォローしているユーザーのみの情報を取得
+        //$following_id = Auth::user()->follows()->pluck('followed_id'); // フォローしているユーザーのidを取得//★
+        /*$posts = Post::with('user')->whereIn('users_id', $following_id)->orWhere('user_id', 'id') ->get();*/ // フォローしているユーザーのidを元に投稿内容を取得
+
+    //public function show(){
+    //$posts = Post::get();   // Postモデル経由でpostsテーブルのレコードを取得
+return view('posts.index', compact('posts')); // posts.index
+
+    /*$posts = \DB::table('posts') // postsテーブルからすべてのレコード情報をゲットする
+    ->join('users', 'posts.id', '=', 'users.id')
+    ->get();
+    return view('posts.index',['posts'=>$posts]); // postsディレクトリにあるindex.blade.phpに渡す*/
+
+    //}
     }
 
     public function postCreate(Request $request){
@@ -81,6 +125,5 @@ class PostsController extends Controller
       $posts->delete();
       return redirect('posts.index');
     } */
-}
 
-//★
+}

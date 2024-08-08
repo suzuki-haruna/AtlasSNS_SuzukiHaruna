@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8" />
+    <head><!--★-->
+    <meta charset="utf-8" />
     <!--IEブラウザ対策-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="ページの内容を表す文章" />
@@ -22,7 +22,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script><!-- Bootstrap -->
     <!--<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>-->
     <script src="{{ asset('js/app.js') }}"></script> <!-- jQuery -->
-</head>
+    </head>
 
 <body>
     <header>
@@ -35,7 +35,7 @@
 
                         <!-- ヘッダー右 -->
                         <!-- <p>〇〇さん<img src="images/arrow.png"></p> ←ここでまとめておいたほうがいい可能性ある!?-->
-                        <div class="header-menu-name"><p>〇〇さん</p></div>
+                        <div class="header-menu-name"><p>{{ session('username') }}さん</p></div>
 
                         <!-- メニュー -->
                         <div class="menu"></div>
@@ -63,17 +63,17 @@
         </div >
         <div id="side-bar">
             <div id="confirm">
-                <p>〇〇さんの</p>
+                <p>{{ session('username') }}さんの</p>
                 <div>
                 <p>フォロー数</p>
-                <p>〇名</p>
+                <p>{{ Auth::user()->followed()->count() }}名</p>
                 <p></p>
                 </div>
                 <p class="btn"><a href="/follow-list">フォローリスト</a></p>
                 <!--{{url('follow-list')}}-->
                 <div>
                 <p>フォロワー数</p>
-                <p>〇名</p>
+                <p>{{ Auth::user()->following()->count() }}名</p>
                 </div>
                 <p class="btn"><a href="/follower-list">フォロワーリスト</a></p>
             </div>

@@ -23,7 +23,7 @@ class FollowsController extends Controller
 
     //追加 フォロー
     public function follow(User $user){
-        $follower = Auth::User();
+        $follower = auth()->user();//Auth::User();
         $is_following = $follower->isFollowing($user->id); //フォローしているか
         if(!$is_following){
             $follower->follow($user->id); //フォローしていなければフォローする
@@ -40,6 +40,23 @@ class FollowsController extends Controller
             return back(); //直前のページにリダイレクト
         }
     }
+
+    //フォローフォロワー数
+    //〇$fw = new Follow(); // Followモデルのインスタンス化
+    //〇$follows = $fw->getData();
+    //$follows = DB::table('follows')->get();
+    //〇return view('posts.index', ['follows' => $follows]);
+    //}
+    //posts.index follow.index
+    /*public function show(User $user){
+        $follow_count = $follower->getFollowCount($user->id);
+        $follower_count = $follower->getFollowerCount($user->id);
+
+    return view('users.show', [
+        'follow_count'   => $follow_count,
+        'follower_count' => $follower_count
+        ]);
+    }*/
 
     //テスト
     public function followsCreate(Request $request)

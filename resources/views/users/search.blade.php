@@ -14,15 +14,6 @@
           @endif
 </div>
 
-<!--テスト-->
-                {!! Form::open(['url' => '/follows/create']) !!}<!--フォームの値を送る-->
-                {{Form::token()}}<!--CSRFトークン-->
-                <div class="">
-                {{ Form::input('submit', 'followId', null, ['class' => 'form-control']) }}
-                </div>
-                <button type="submit" class="btn btn-success pull-right">テスト</button>
-                {!! Form::close() !!}
-
 <!-- ユーザー一覧 -->
         <table class="table table-hover">
             @foreach ($users as $user)
@@ -33,13 +24,14 @@
 
                 <!-- フォロー -->
                 @if (Auth::user()->isFollowing($user->id))
-                <form action="{{ route('unfollow', ['id' => $user->id]) }}" method="POST">
+                <form action="{{ route('unfollow', ['user' => $user->id]) }}" method="POST">
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
                     <td><button type="submit" class="btn btn-danger">フォロー解除</button></td>
                 </form>
                 @else
-                <form action="{{ route('follow', $user->id) }}" method="POST">
+                <form action="{{ route('follow', ['user'=> $user->id]) }}" method="POST">
+<!--{{ route('follow', $user->id) }}-->
                 @csrf
                 <td><!--<input type="button" name="follow">-->
                 <button type="submit" class="btn btn-primary">フォローする</button></td>

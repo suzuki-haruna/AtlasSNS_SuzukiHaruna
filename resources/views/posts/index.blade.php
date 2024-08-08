@@ -8,7 +8,7 @@
 <div class="container">
 
   {!! Form::open(['url' => 'index']) !!} <!-- indexに値を送る -->
-  {{ Form::token() }}
+  {{ Form::token() }}<!--★-->
 
 <img src="{{ asset('storage/'.Auth::user()->images) }}">
 
@@ -42,6 +42,16 @@
            <a class="js-modal-close" href="">閉じる</a>
         </div>
     </div> -->
+
+@foreach($posts as $post)
+<?php $user = Auth::user(); ?>
+@if($user)
+<p>テスト：{{ $user->mail }}</p>
+<p>名前：{{ $post->username }}</p>
+<p>投稿内容：{{ $post->post }}</p>
+@else
+@endif
+@endforeach
 
 <!-- /追加 -->
 

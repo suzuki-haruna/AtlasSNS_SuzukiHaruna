@@ -7,10 +7,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use Illuminate\Support\Facades\Auth; //追加 フォローフォロワー
 use Illuminate\Database\Eloquent\Model; //プロフィール編集
-//★
 
 //追加 プロフィール編集
-/*class User extends Model
+/*class User extends Model //Modelクラス(紐づけたいテーブルに対して単数形で書く)複数存在できない!?//★
 {
     //
     use HasFactory;
@@ -45,26 +44,35 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\User'); //userに属するuserを取得
     }*/
+    /*public function users()
+    {
+        return $this->belongsToMany('App\User', 'follows', 'following_id', 'followed_id');
+    }
 
-    //フォロー リレーション
+    public function users()
+    {
+        return $this->belongsToMany('App\User', 'follows', 'followed_id', 'following_id');
+    }*/
+
+    //！フォロー リレーション◎
     public function following()
     {
-        return $this->belongsToMany(User::class, 'follows', 'followed_id', 'following_id');
+        return $this->belongsToMany(User::class, 'follows', 'followed_id', 'following_id'); //User::class self::class
     }
-    //フォロー解除 リレーション
     public function followed()
     {
-        return $this->belongsToMany(User::class, 'follows', 'following_id', 'followed_id');
+        return $this->belongsToMany(User::class, 'follows', 'following_id', 'followed_id',);
     }
-    //フォローする
+    //！フォローする
     public function follow($user_id)
     {
-        return $this->following()->attach($user_id);
+        return $this->followed()->attach($user_id);
     }
+
     //フォロー解除
-    public function unfollow(Int $user_id)
+    public function unfollow($user_id) //Int
     {
-        return $this->follows()->detach($user_id);
+        return $this->followed()->detach($user_id);
     }
     //フォローしているか
     public function isFollowing($user_id)
@@ -72,9 +80,15 @@ class User extends Authenticatable
         return (boolean) $this->followed()->where('followed_id', $user_id)->first();
     }
     //フォローされているか
-    public function isFollowed(User $user)
+    public function isFollowed($user_id)
     {
-        return (bool) $this->following()->where('following_id', $user->id)->exists();
+        return (boolean) $this->following()->where('following_id', $user->id);//->first(['id']);
+    }
+    //followers=following follows=followed
+
+    //リレーション
+    public function posts(){
+        return $this->hasMany('App\Post');
     }
 
     //追加 プロフィール編集機能
