@@ -22,8 +22,8 @@ use App\Http\Controllers\PostsController; //PostsControllerを読み込み
 */
 
 //ログアウト中のページ
-Route::get('/login', 'Auth\LoginController@login')->name('login'); //必要(name属性追加)//★
-Route::post('/login', 'Auth\LoginController@login');//->name('login'); //必要(name属性追加!?)
+Route::get('/login', 'Auth\LoginController@login')->name('login'); //必要(name属性追加)
+Route::post('/login', 'Auth\LoginController@login');
 
 Route::get('/register', 'Auth\RegisterController@register');
 Route::post('/register', 'Auth\RegisterController@register');
@@ -31,15 +31,13 @@ Route::post('/register', 'Auth\RegisterController@register');
 Route::get('/added', 'Auth\RegisterController@added');
 Route::post('/added', 'Auth\RegisterController@added');
 
-//}); //追加04
-
 //ログイン中のページ
-Route::group(['middleware' => 'auth'], function() { //追加04
-//'verified'!?
-//Route::get('/', function(){return redirect('/login');});
+Route::group(['middleware' => 'auth'], function() { //追加04 //★
 
 Route::get('/index','PostsController@index'); //追加04
 Route::post('/index','PostsController@postCreate');//POST通信でPostsControllerのpostCreateメソッドとつなげる
+Route::get('/index/{id}/delete','PostsController@delete');
+Route::post('/post/update','PostsController@update');//◎
 //Route::get('/index','PostsController@show');
 //Route::post('/index','PostsController@index'); //POST通信でPostsControllerのindexメソッドとつなげる
 //Route::post('/create','PostsController@postCreate');
@@ -53,6 +51,9 @@ Route::post('/index','PostsController@postCreate');//POST通信でPostsControlle
 Route::get('/profile','UsersController@profile')->name('profile');
 Route::put('/profile', 'UserController@profileUpdate')->name('profile_edit');
 Route::post('profile/{id}/update','UsersController@update');
+
+//フォロープロフ
+Route::get('/profiles','UsersController@profiles');
 
 //Route::post('/profile', 'UserController@profile');
 //追加 プロフィール編集

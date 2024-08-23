@@ -14,11 +14,66 @@ use Illuminate\Support\Facades\DB; //DB接続に必要なクラスをインポ�
 
 class FollowsController extends Controller
 {
-    public function followList(){
-        return view('follows.followList');
+    public function followList(Post $posts, User $user){
+
+        //フォロー
+        //$users = User::all();
+        //$following_id = Auth::user()->follows->pluck('followed_id'); //フォローしているユーザーのidを獲得
+
+        //フォロー投稿
+        $user = Auth::user();
+        $follower = auth()->user();
+        $is_following = $follower->isFollowing($user->id);
+
+        $posts = User::select('users.username','posts.id','posts.post','posts.created_at','users.images','posts.user_id')//'posts.*','posts.user_id',
+        ->whereIn('user_id', Auth::user()->followPost())
+        ->orWhere('user_id', $user->id)
+        ->join('posts','posts.user_id','=','users.id')
+        ->orderBy('created_at','desc')
+        ->get();
+
+        //アイコン
+        $follow_list = User::select('users.id', 'users.images', 'follows.followed_id', 'follows.following_id')
+        ->whereIn('following_id', Auth::user())
+        //->orWhere('following_id', Auth::user()->followPost())
+        //->orWhere('followed_id', $user->id)
+        ->join('follows','follows.followed_id','=','users.id')
+        ->get();
+        //ddd($follow_list);
+
+        return view('follows.followList', compact('posts', 'follow_list'));//'followed_id'
     }
-    public function followerList(){
-        return view('follows.followerList');
+
+    public function followerList(Post $posts, User $user){
+
+        //フォワー投稿
+        $user = Auth::user();
+        $follower = auth()->user();
+        $is_following = $follower->isFollowing($user->id); //$is_followedにしたい
+
+        $posts = User::select('users.username','posts.id','posts.post','posts.created_at','users.images','posts.user_id')//'posts.*','posts.user_id',
+        ->whereIn('user_id', Auth::user()->followPost())
+        ->orWhere('user_id', $user->id)
+        ->join('posts','posts.user_id','=','users.id')
+        ->orderBy('created_at','desc')
+        ->get();
+
+        //アイコン
+        $follow_list = User::select('users.id', 'users.images', 'follows.followed_id', 'follows.following_id')
+        ->whereIn('followed_id', Auth::user())
+        //->orWhere('following_id', Auth::user()->followPost())
+        //->orWhere('followed_id', $user->id)
+        ->join('follows','follows.following_id','=','users.id')
+        ->get();
+        //ddd($follow_list);
+        /*$follow_list = User::select('users.id', 'users.images', 'follows.followed_id', 'follows.following_id')
+        ->whereIn('following_id', Auth::user()->followPost())
+        ->orWhere('followed_id', $user->id)
+        ->join('follows','follows.followed_id','=','users.id')
+        ->get();*/
+
+        return view('follows.followerList', compact('posts', 'follow_list'));
+        //return view('follows.followerList');
     }
 
     //追加 フォロー

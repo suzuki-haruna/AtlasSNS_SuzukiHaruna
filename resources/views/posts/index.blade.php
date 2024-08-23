@@ -8,7 +8,7 @@
 <div class="container">
 
   {!! Form::open(['url' => 'index']) !!} <!-- indexに値を送る -->
-  {{ Form::token() }}<!--★-->
+  {{ Form::token() }}
 
 <img src="{{ asset('storage/'.Auth::user()->images) }}">
 
@@ -27,31 +27,44 @@
 </form> -->
 
 {!! Form::close() !!}
-</div>
-
-<!-- モーダルの中身 -->
-<!--    <div class="modal js-modal">
-        <div class="modal__bg js-modal-close"></div>
-        <div class="modal__content">
-           <form action="" method="">
-                <textarea name="" class="modal_post"></textarea>
-                <input type="hidden" name="" class="modal_id" value="">
-                <input type="submit" value="更新">
-                {{ csrf_field() }}
-           </form>
-           <a class="js-modal-close" href="">閉じる</a>
-        </div>
-    </div> -->
+</div><!--★-->
 
 @foreach($posts as $post)
-<?php $user = Auth::user(); ?>
-@if($user)
-<p>テスト：{{ $user->mail }}</p>
+<p>{{ $post->created_at }}</p>
+<p><img src="{{ asset('storage/'.$post->images) }}"></p>
 <p>名前：{{ $post->username }}</p>
 <p>投稿内容：{{ $post->post }}</p>
+
+@if ($post->user_id == Auth::user()->id)
+<!-- 投稿編集 -->
+<a class="js-modal-open" href="" post="{{ $post->post }}" post_id="{{ $post->id }}"><img src="images/edit.png" alt="編集"></a>
+<!--<button type="submit" class="btn btn-success pull-right"><img src="images/edit.png" alt="送信"></button>-->
+
+<!-- 削除 -->
+<button type="submit" class="btn btn-success pull-right"><a href="/index/{{$post->id}}/delete" onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')"><img src="images/trash.png" onMouseOver="this.src='images/trash-h.png'" onMouseOut="this.src='images/trash.png'" alt="削除"></a></button>
 @else
 @endif
+
 @endforeach
+
+<!-- モーダルの中身 -->
+<!--更新ボタンを押す　→　モーダル画面が表示される　→　更新する内容を入力して更新ボタンを押す　→　投稿のテーブルが更新され、トップページに戻る。-->
+<!--index.blade.phpのモーダル中身、web.php、PostsControllerの記述が必要-->
+<!--①更新ボタンを押した時に、どのURLに遷移するのか、また、更新をするためにどんなデータを送る必要があるのかを考え、記述をする-->
+<!--②web.phpにURLと合わせてどのControllerのどのメソッドの処理をするのかを記述し、Controllerに実際に更新する処理を記述する-->
+<div class="modal js-modal">
+    <div class="modal__bg js-modal-close"></div>
+    <div class="modal__content">
+        <form action="/post/update" method="post"><!--URLの記述(/index/updateだけでもよい!?)と、送信方法を追記(GET?◎POST?)-->
+            <textarea name="upPost" class="modal_post" maxlength="150"></textarea><!--name属性を追記。ここは送るデータに名前を付けているだけなので、受け取る側(Controller側)と一致していればなんでも可--><!--編集したい投稿の内容を送っている-->
+            <input type="hidden" name="id" class="modal_id" value=""><!--name属性を追記。ここは送るデータに名前を付けているだけなので、受け取る側(Controller側)と一致していればなんでも可--><!--どの投稿を編集したいのかを特定するidを送っている-->
+            <!--<input type="submit" value="更新">-->
+            <button type="submit" class="btn btn-success pull-right"><img src="images/edit.png" alt="送信"></button>
+            {{ csrf_field() }}
+        </form>
+        <!--<a class="js-modal-close" href="">閉じる</a>-->
+    </div>
+</div>
 
 <!-- /追加 -->
 

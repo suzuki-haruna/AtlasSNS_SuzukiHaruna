@@ -22,9 +22,9 @@ class PostsController extends Controller
     $this->middleware('auth');
     }
 
-    public function index(Post $posts){//Post $posts, Follow $follows
+    public function index(Post $posts, User $user){//Post $posts, Follow $follows
 
-        /*$posts = Post::query()->whereIn('user_id', Auth::user()->follows()->pluck('followed_id'))->latest()->get();
+        /*$posts = Post::query()->whereIn('user_id', Auth::user()->followd()->pluck('followed_id'))->latest()->get();
         return view('posts.index')->with([
             'posts' => $posts,
             ]);*/
@@ -35,7 +35,14 @@ class PostsController extends Controller
       $posts = Post::orderBy('created_at','desc')->with('user')->whereIn('user_id',$following_id)->orWhere('user_id',$user->id)->get();
       return view('posts.index',['user'=>$user, 'posts'=>$posts]);*/
 
-$posts = User::select('users.username','posts.id','posts.post','posts.created_at')
+$user = Auth::user();
+$follower = auth()->user();//Auth::User();
+//$posts = User::select('users.username','posts.id','posts.post','posts.created_at');
+$is_following = $follower->isFollowing($user->id);
+
+$posts = User::select('users.username','posts.id','posts.post','posts.created_at','users.images','posts.user_id')//'posts.*','posts.user_id',
+->whereIn('user_id', Auth::user()->followPost())
+->orWhere('user_id', $user->id)
 ->join('posts','posts.user_id','=','users.id')
 ->orderBy('created_at','desc')
 ->get();
@@ -60,12 +67,19 @@ $posts = User::select('users.username','posts.id','posts.post','posts.created_at
         // その際にview内で使用する変数を代入します
 
         // フォローしているユーザーのみの情報を取得
-        //$following_id = Auth::user()->follows()->pluck('followed_id'); // フォローしているユーザーのidを取得//★
+        //$following_id = Auth::user()->follows()->pluck('followed_id'); // フォローしているユーザーのidを取得
         /*$posts = Post::with('user')->whereIn('users_id', $following_id)->orWhere('user_id', 'id') ->get();*/ // フォローしているユーザーのidを元に投稿内容を取得
 
+        //参考FollowsController
+        /*$user = Auth::user();
+        $follower = auth()->user();//Auth::User();
+        $is_following = $follower->isFollowing($user->id); //フォローしているか
+        if($is_following){
+            $follower->follow($user->id);*/
+
     //public function show(){
-    //$posts = Post::get();   // Postモデル経由でpostsテーブルのレコードを取得
-return view('posts.index', compact('posts')); // posts.index
+    //$posts = Post::get(); // Postモデル経由でpostsテーブルのレコードを取得
+    return view('posts.index', compact('posts')); //★
 
     /*$posts = \DB::table('posts') // postsテーブルからすべてのレコード情報をゲットする
     ->join('users', 'posts.id', '=', 'users.id')
@@ -73,7 +87,7 @@ return view('posts.index', compact('posts')); // posts.index
     return view('posts.index',['posts'=>$posts]); // postsディレクトリにあるindex.blade.phpに渡す*/
 
     //}
-    }
+  }
 
     public function postCreate(Request $request){
 
@@ -111,19 +125,40 @@ return view('posts.index', compact('posts')); // posts.index
     public function edit($id){ //編集
       $posts = Post::find($id);
       return view('posts.index', ['post' => $posts]);
-    }
+    }*/
 
-    public function update(Request $request, $id){
+    //投稿編集
+    //dd
+    /*public function update(Request $request, $id){
       $posts = Post::find($id);
       $posts->post = $request->post;
       $posts->save();
       return redirect('posts.index');
+    }*/
+    public function update(Request $request, Post $post){
+      $id = $request->input('id');
+      $up_post = $request->input('upPost');
+
+      $post = \DB::table('posts')
+      ->where('id', $request->id)
+      ->update(['post' => $up_post]);
+      return redirect('/index')->with('warning', '編集完了');
     }
 
-    public function destroy($id){ //削除機能
-      $posts = Post::find($id);
-      $posts->delete();
-      return redirect('posts.index');
-    } */
+    //投稿削除
+    public function delete($id){
+      /*$posts = Post::find($id);
+      $posts->delete();*/
+
+
+      \DB::table('posts')
+      ->where('posts.id', $id)
+      ->delete();
+
+      $user_id = Auth::user()->id;
+
+      return redirect('/index');
+      //return back();
+    }
 
 }

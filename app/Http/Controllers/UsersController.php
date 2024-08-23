@@ -147,5 +147,12 @@ class UsersController extends Controller
         return redirect()->route('articles_index')->with('msg_success', 'パスワードの更新が完了しました');
 
         } */
+
+    }
+
+    // フォロープロフ
+    public function profiles(){
+        $user = Auth::user();
+        return view('users.profiles', ['user' => $user]);
     }
 }

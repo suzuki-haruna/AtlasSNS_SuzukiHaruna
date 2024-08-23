@@ -86,10 +86,15 @@ class User extends Authenticatable
     }
     //followers=following follows=followed
 
-    //リレーション
-    public function posts(){
-        return $this->hasMany('App\Post');
+    public function followPost(){
+        $followPost = $this->followed()->pluck('users.id')->toArray(); //ユーザがフォロー中のユーザを取得
+        return $followPost; //フォロー中のユーザを返す
     }
+
+    //リレーション
+    /*public function posts(){
+        return $this->hasMany('App\Post');
+    }*/
 
     //追加 プロフィール編集機能
     public function updateAll() {
@@ -114,7 +119,7 @@ class User extends Authenticatable
         'following_id', 'followed_id'
     ];*/
     //リレーション
-    public function follows(){
+    /*public function follows(){
         return $this->hasMany('App\Follow');
-    }
+    }*/
     }
