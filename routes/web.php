@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostsController; //PostsControllerを読み込み
+use App\Http\Controllers\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,9 +33,9 @@ Route::get('/added', 'Auth\RegisterController@added');
 Route::post('/added', 'Auth\RegisterController@added');
 
 //ログイン中のページ
-Route::group(['middleware' => 'auth'], function() { //追加04 //★
+Route::group(['middleware' => 'auth'], function() { //追加04
 
-Route::get('/index','PostsController@index'); //追加04
+Route::get('/index','PostsController@index'); //追加04 //★
 Route::post('/index','PostsController@postCreate');//POST通信でPostsControllerのpostCreateメソッドとつなげる
 Route::get('/index/{id}/delete','PostsController@delete');
 Route::post('/post/update','PostsController@update');//◎
@@ -46,11 +47,11 @@ Route::post('/post/update','PostsController@update');//◎
 
 //Route::get('/follow','FollowsController@follow'); //追加(/indexではないものにする→一先ず/follow)
 
+//プロフ
 //Route::get('/profile','UsersController@profile')
-
-Route::get('/profile','UsersController@profile')->name('profile');
-Route::put('/profile', 'UserController@profileUpdate')->name('profile_edit');
-Route::post('profile/{id}/update','UsersController@update');
+Route::get('/profile','UsersController@profile')->name('profile');//〇ただの表示用!?
+Route::put('/profile','UsersController@profileUpdate')->name('profile_edit');
+Route::post('/profile/{id}/update','UsersController@update');//getかも...//いらないかも...//☆
 
 //フォロープロフ
 Route::get('/profiles','UsersController@profiles');

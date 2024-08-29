@@ -35,7 +35,8 @@
 
                         <!-- ヘッダー右 -->
                         <!-- <p>〇〇さん<img src="images/arrow.png"></p> ←ここでまとめておいたほうがいい可能性ある!?-->
-                        <div class="header-menu-name"><p>{{ session('username') }}さん</p></div>
+                        <?php $user = Auth::user(); ?>
+                        <div class="header-menu-name"><p>{{ $user->username }}さん</p></div>
 
                         <!-- メニュー -->
                         <div class="menu"></div>
@@ -63,7 +64,7 @@
         </div >
         <div id="side-bar">
             <div id="confirm">
-                <p>{{ session('username') }}さんの</p>
+                <p>{{ $user->username }}さんの</p>
                 <div>
                 <p>フォロー数</p>
                 <p>{{ Auth::user()->followed()->count() }}名</p>

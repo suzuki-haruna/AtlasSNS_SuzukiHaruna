@@ -22,8 +22,8 @@ class UsersController extends Controller
     $images = $request->images;
 
     if($images->isValid()) {
-      $filePath = $images->store('public');//★
-      $user->images = str_replace('public/', '', $filePath);
+      $filePath = $images->store('public');
+      $user->images = str_replace('public/', '', $filePath);//★
       $user->save();
       return redirect("/user/{$user->id}")->with('user', $user);
 
@@ -64,53 +64,136 @@ class UsersController extends Controller
         }*/
 
         //追加 プロフィール編集機能
-        public function profileUpdate(Request $request, $id/*, User $user*/){
+        public function profileUpdate(Request $request, /*$id,*/User $user){
+            //ddd($id);
+            //ddd('check');
 
-        //バリデーション
+//①バリデーション
             $request->validate([
               'username' => 'required|min:2|max:12',
-              'mail' => 'required|unique:users,mail|email|min:5|max:40,' . $this->id,
-              'password' => 'required|regex:/^[A-Za-z0-9]+$/u|min:8|max:20','confirmed',
+              'mail' => 'required|email|min:5|max:40|unique:users,mail,'.Auth::user()->mail.',mail',/*. $this->id,*///,
+              'password' => 'confirmed|required|regex:/^[A-Za-z0-9]+$/u|min:8|max:20',
                 'bio' => 'max:150',
                 'images' => 'file|image',
             ]);
 
-        /*try*/ //{
-            //$user = Auth::user();
-            $id = $request->input('id');
+            //try {
+            $user = Auth::user();
+            $id = Auth::id();
+
+            $username = $request->input('username');
+            //$user->mail = $request->input('mail');
+            $mail = $request->input('mail');
+
+            //$user->password = bcrypt($request->input('password'));//newpassword
+            //$user->password = Hash::make($request->get('new-password'));
+            //$user->password = $request->input('password');
+            $password = $request->input('password');
+
+            //$user->bio = $request->input('bio');
+            $bio = $request->input('bio');
+
+            //$user->images = basename($image);いらない
+
+            /*$user = User::find(auth()->id());
+            $user->images = basename($images);
+            $user->save();*/
+
+            if ($request->images === null) {
+            /*User::create([
+          'username' => $request->username,
+        ]);*/
+
+        \DB::table('users') //usersテーブルをここで更新
+        ->where('id', $id) //これがないと全てのユーザー情報が上書きされてしまう
+        ->update([
+            //'username' => $user->username,
+            'username' => $username,
+            //'mail' => $user->mail,
+            'mail' => $mail,
+            //'password' => $user->password,
+            'password' => bcrypt($password),
+            //'bio' => $user->bio,
+            'bio' => $bio,
+            'images' => $user->images,
+        ]
+
+            //['username' => $username],
+            //['mail' => $mail],
+            // ['password' => bcrypt($password)],
+            // ['bio' => $bio],
+            //['images' => $images]
+        );
+
+      }else {
+            //画像 if文で画像必須をなくす?なければそのままに
+            //$image = $request->file('images')->store('public/images');//iconimage
+
+            $images = $request->file->store('public'); //ここは必要
+
+            //if($image = null){ }
+            //if($image != null){ }
+            /*if ($path) {
+                $user->update([
+                    'images' => $path,
+                ]);
+            }*/
+            /*User::create([
+            'username' => $request->username,
+          'description' => $request->description,
+          'impression' => $request->impression,
+          'images' => basename($images)
+        ]);*/
+
+/*②$user/*$id*//* = $request->input('id');
             $username = $request->input('username');
             $mail = $request->input('mail');
             $password = bcrypt($request->input('password'));
             $bio = $request->input('bio');
             $images = $request->input('images');
             //$user->update();
-            $user->save();
+            $user->save();*/
 
-            User::profileUpdate([
+/*③User::profileUpdate([
                 'username' => $username,
                 'mail' => $mail,
                 'password' => bcrypt($password),
-            ]);
+            ]);*/
+
         /*$user = User::find($id);
     $user->update($request->all());
     return redirect()->route('index')
       ->with('success', 'user updated successfully.');*/
+      $user = User::find(auth()->id());
+            $user->images = basename($images);
+            $user->save();
 
-            /*\DB::table('users')
-        ->where('id', $id)
-        ->update(
-            ['username' => $username],
-            ['mail' => $mail],
+            \DB::table('users') //usersテーブルをここで更新
+        ->where('id', $id) //これがないと全てのユーザー情報が上書きされてしまう
+        ->update([
+            //'username' => $user->username,
+            'username' => $username,
+            //'mail' => $user->mail,
+            'mail' => $mail,
+            //'password' => $user->password,
+            'password' => bcrypt($password),
+            //'bio' => $user->bio,
+            'bio' => $bio,
+            'images' => $user->images,
+        ]
+
+            //['username' => $username],
+            //['mail' => $mail],
             // ['password' => bcrypt($password)],
             // ['bio' => $bio],
-            ['images' => $images]
-        );*/
-
+            //['images' => $images]
+        );
+    }
             /*$update = [
                 'username' => 'join',
             ];
             User::where('id', $id)->update([$update]);*/
-            User::where('id', $id)->update([$update]);
+//④User::where('id', $id)->update([$update]);
             /*  'username' => $username,
               'price' => $up_price
             ]);*/
@@ -122,8 +205,32 @@ class UsersController extends Controller
 	    form.password.value = '';
         } */
 
-        //return redirect()->route('/index')/*->with('msg_success', 'プロフィールの更新が完了しました');*/
-        return redirect('profile');
+        /*try {
+            $user = Auth::user();
+            $user->name = $request->input('username');
+            $user->save();
+        } catch (\Exception $e) {
+            return back()->with('msg_error', 'プロフィールの更新に失敗しました')->withInput();
+        }
+
+        return redirect()->route('/profile');/*->with('msg_success', 'プロフィールの更新が完了しました');*/
+
+        //画像更新
+        /*$image = $request->file('images');
+        // $request->imgはformのinputのname='img'の値です
+        // ->storeメソッドは別途説明記載します
+        $path = $request->img->store('public/images');
+        // パスから、最後の「ファイル名.拡張子」の部分だけ取得します 例)sample.jpg
+        $images = basename($path);
+        // FileImageをインスタンス化(実体化)します
+        $data = new FileImage;
+        // 登録する項目に必要な値を代入します
+        $data->images = $images;
+        $data->save(); // データベースに保存*/
+
+        //$request->session()->put('images', $images); //セッションに保存
+
+return redirect('/index');
 
     //}
     /*return view('/index');*/

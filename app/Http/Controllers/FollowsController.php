@@ -1,6 +1,6 @@
 <?php
 
-//フォロー機能：ここは多分完了。30行目のreturnは怪しい(index表示)
+//フォロー機能ではここは多分記入しなくてよい//★2
 
 namespace App\Http\Controllers;
 
@@ -24,6 +24,7 @@ class FollowsController extends Controller
         $user = Auth::user();
         $follower = auth()->user();
         $is_following = $follower->isFollowing($user->id);
+        //ddd($follower);
 
         $posts = User::select('users.username','posts.id','posts.post','posts.created_at','users.images','posts.user_id')//'posts.*','posts.user_id',
         ->whereIn('user_id', Auth::user()->followPost())
@@ -48,11 +49,11 @@ class FollowsController extends Controller
 
         //フォワー投稿
         $user = Auth::user();
-        $follower = auth()->user();
-        $is_following = $follower->isFollowing($user->id); //$is_followedにしたい
+        $followed = auth()->user();
+        $is_followed = $followed->isFollowed($user->id); //$is_followedにしたい
 
         $posts = User::select('users.username','posts.id','posts.post','posts.created_at','users.images','posts.user_id')//'posts.*','posts.user_id',
-        ->whereIn('user_id', Auth::user()->followPost())
+        ->whereIn('user_id', Auth::user()->followedPost())
         ->orWhere('user_id', $user->id)
         ->join('posts','posts.user_id','=','users.id')
         ->orderBy('created_at','desc')
@@ -121,4 +122,3 @@ class FollowsController extends Controller
         return back();
     }
 }
-//★

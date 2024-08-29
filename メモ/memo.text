@@ -1,8 +1,11 @@
-ID61/ああ/abc@jp/aaaaaaaa
-ID66/あい/abb@jp/aaaaaaaa
+ID61/ああ/abc@jp/aaaaaaaa→00000000?
+ID66/あい/abb@jp/aaaaaaaa→あいう/あいうえお/abb@jp/00000000/icon2
+ID71/浜崎/ hamasaki@jp/hhhhhhhh
+70/佐藤/satou@jp/00000000
+✕68/あおあお
+72/Gackt/gackt/00000000
 
 ■単語
-□hoge<ホゲ>特に意味がない、何を入れてもかまわない。
 □web<>World Wide Web<ワールド ワイド ウェブ>
 
 https://www.ritolab.com/
@@ -194,8 +197,9 @@ class FollowsController extends Controller
 
 <!--<img src="{{ asset('storage/'.$followed_id->images) }}">-->
 
+フォロワー 60ああ/61ああ,はろー/69鈴木オーマイガー！
+
 【※】
-searchユーザー画像
 
 【？】
 緑川塾

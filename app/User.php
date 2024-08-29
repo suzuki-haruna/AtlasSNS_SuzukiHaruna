@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Auth; //追加 フォローフォロワー
 use Illuminate\Database\Eloquent\Model; //プロフィール編集
 
 //追加 プロフィール編集
-/*class User extends Model //Modelクラス(紐づけたいテーブルに対して単数形で書く)複数存在できない!?//★
+/*class User extends Model //Modelクラス(紐づけたいテーブルに対して単数形で書く)複数存在できない!?
 {
-    //
+    //★
     use HasFactory;
     protected $fillable = ['username', 'mail'];
 }*/
@@ -82,13 +82,18 @@ class User extends Authenticatable
     //フォローされているか
     public function isFollowed($user_id)
     {
-        return (boolean) $this->following()->where('following_id', $user->id);//->first(['id']);
+        return (boolean) $this->following()->where('following_id', $user_id)->first();//(['id']);
+        //ddd($user);
     }
     //followers=following follows=followed
 
     public function followPost(){
         $followPost = $this->followed()->pluck('users.id')->toArray(); //ユーザがフォロー中のユーザを取得
         return $followPost; //フォロー中のユーザを返す
+    }
+    public function followedPost(){
+        $followedPost = $this->following()->pluck('users.id')->toArray();
+        return $followedPost; //フォロー中のユーザを返す
     }
 
     //リレーション

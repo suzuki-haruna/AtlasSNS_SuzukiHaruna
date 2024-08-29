@@ -19,7 +19,7 @@
             @foreach ($users as $user)
             @if ($user->id !== Auth::user()->id) <!-- 自分は表示しない -->
             <tr>
-                <td><img src="{{ asset('storage/'.Auth::user()->images) }}"></td><!-- {{ $user->images }} -->
+                <td><img src="{{ asset('storage/'.$user->images) }}"></td><!-- {{ $user->images }} --><!--{{ asset('storage/'.Auth::user()->images) }}-->
                 <td>{{ $user->username }}</td>
 
                 <!-- フォロー -->
