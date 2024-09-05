@@ -46,7 +46,7 @@ class RegisterController extends Controller
             $request->validate([
               'username' => 'required|min:2|max:12',
               'mail' => 'required|unique:users,mail|email|min:5|max:40',
-              'password' => 'required|regex:/^[A-Za-z0-9]+$/u|min:8|max:20','confirmed',
+              'password' => 'confirmed|required|regex:/^[A-Za-z0-9]+$/u|min:8|max:20',
         ]);
 
             $username = $request->input('username');
@@ -70,9 +70,6 @@ class RegisterController extends Controller
     {
         return view('auth.added');
 
-        //$request->session()->put('username', $username);
-        //$this->create($data);
-        //return redirect('added')->with('username', $username);
     }
 
 }

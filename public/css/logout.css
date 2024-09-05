@@ -21,7 +21,7 @@ body {
 
 a {
     color: #fff;
-    text-decoration: none;
+    /*text-decoration: none;*/
     font-size: 18px;
 }
 
@@ -120,4 +120,8 @@ input {
 
 .add-btn {
     margin: 30px auto 0 -100%;
+}
+
+.add-btn a {
+    text-decoration: none;
 }

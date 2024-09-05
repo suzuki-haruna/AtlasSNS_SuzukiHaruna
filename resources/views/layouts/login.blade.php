@@ -29,7 +29,7 @@
 
             <div id = "head">
                 <div class="header-wrapper">
-                <div class="header-logo"><h1><a href="/index"><img src="images/atlas.png"></a></h1></div>
+                <div class="header-logo"><h1><a href="/index"><img src="{{ asset('storage/atlas.png') }}"></a></h1></div>
                     <div id=""></div>
                         <div id=""></div>
 

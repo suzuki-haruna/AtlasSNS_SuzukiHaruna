@@ -23,7 +23,7 @@ class UsersController extends Controller
 
     if($images->isValid()) {
       $filePath = $images->store('public');
-      $user->images = str_replace('public/', '', $filePath);//★
+      $user->images = str_replace('public/', '', $filePath);
       $user->save();
       return redirect("/user/{$user->id}")->with('user', $user);
 
@@ -31,13 +31,7 @@ class UsersController extends Controller
  }
 
     //【検索】
-    //ユーザー一覧
-    /*public function search(){
-        $users = User::get(); //Userモデル(usersテーブル)からレコード情報を取得
-        return view('users.search',['users'=>$users]); //viewヘルパ(指定したphpファイルを画面に表示する)
-    }*/
-
-    //検索機能
+    //検索機能//★
     public function search(Request $request){
         $keyword = $request->input('keyword');
         if(!empty($keyword)){
@@ -74,7 +68,9 @@ class UsersController extends Controller
               'mail' => 'required|email|min:5|max:40|unique:users,mail,'.Auth::user()->mail.',mail',/*. $this->id,*///,
               'password' => 'confirmed|required|regex:/^[A-Za-z0-9]+$/u|min:8|max:20',
                 'bio' => 'max:150',
+                'file' => 'image',
                 'images' => 'file|image',
+                //'images'=>['file','mimes:jpeg,jpg,png,bmb'],
             ]);
 
             //try {
@@ -99,10 +95,24 @@ class UsersController extends Controller
             $user->images = basename($images);
             $user->save();*/
 
-            if ($request->images === null) {
+        //画像アップロード if文で画像必須をなくす
+        //$request->('images');
+        //if ($request->images === null) { //もし()
+        //if ($request->images == null) {
+        if ($request->file == null) {
+
+
             /*User::create([
           'username' => $request->username,
         ]);*/
+
+
+/*$images = $request->file->store('public'); //ここは必要
+
+$user = User::find(auth()->id());
+            $user->images = basename($images);
+            $user->save();*/
+
 
         \DB::table('users') //usersテーブルをここで更新
         ->where('id', $id) //これがないと全てのユーザー情報が上書きされてしまう
@@ -125,11 +135,9 @@ class UsersController extends Controller
             //['images' => $images]
         );
 
-      }else {
-            //画像 if文で画像必須をなくす?なければそのままに
-            //$image = $request->file('images')->store('public/images');//iconimage
+        } else {
 
-            $images = $request->file->store('public'); //ここは必要
+        $images = $request->file->store('public'); //ここは必要
 
             //if($image = null){ }
             //if($image != null){ }
@@ -189,6 +197,13 @@ class UsersController extends Controller
             //['images' => $images]
         );
     }
+
+        /*if ($images) {
+        $images->update([
+        'images' => $images,
+        ]);
+        }*/
+
             /*$update = [
                 'username' => 'join',
             ];
@@ -258,8 +273,18 @@ return redirect('/index');
     }
 
     // フォロープロフ
-    public function profiles(){
-        $user = Auth::user();
-        return view('users.profiles', ['user' => $user]);
+    public function profiles($id){ //$id
+        $member = User::find($id);
+        //ddd($member);
+        //$user_id = ？？？;//受け取ったidを$user_idに変換する。//id?
+
+        $user = \DB::table('users');
+        $user = User::select('users.username','posts.id','posts.post','posts.created_at','users.images','posts.user_id')//'posts.*','posts.user_id',
+        ->leftJoin('posts', 'users.id', '=', 'posts.user_id') //テーブル結合
+        ->where( 'users.id', '=' , $id )//$users_id?
+        ->orderBy('created_at','desc')
+        ->get();
+
+        return view('users/profiles', ['user'=>$user, 'member'=>$member]); //ユーザー情報をビューに渡す//compact('member')
     }
 }

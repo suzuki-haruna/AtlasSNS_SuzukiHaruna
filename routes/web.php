@@ -35,9 +35,9 @@ Route::post('/added', 'Auth\RegisterController@added');
 //ログイン中のページ
 Route::group(['middleware' => 'auth'], function() { //追加04
 
-Route::get('/index','PostsController@index'); //追加04 //★
-Route::post('/index','PostsController@postCreate');//POST通信でPostsControllerのpostCreateメソッドとつなげる
-Route::get('/index/{id}/delete','PostsController@delete');
+Route::get('/index','PostsController@index'); //追加04
+Route::post('/index','PostsController@postCreate'); //POST通信でPostsControllerのpostCreateメソッドと繋げる
+Route::get('/index/{id}/delete','PostsController@delete'); //★
 Route::post('/post/update','PostsController@update');//◎
 //Route::get('/index','PostsController@show');
 //Route::post('/index','PostsController@index'); //POST通信でPostsControllerのindexメソッドとつなげる
@@ -54,7 +54,9 @@ Route::put('/profile','UsersController@profileUpdate')->name('profile_edit');
 Route::post('/profile/{id}/update','UsersController@update');//getかも...//いらないかも...//☆
 
 //フォロープロフ
-Route::get('/profiles','UsersController@profiles');
+//Route::get('/profiles','UsersController@profiles');
+//Route::get('users/{id}/profile','UsersController@profiles')->name('profile.index');
+Route::get('users/{id}/profiles','UsersController@profiles')->name('profiles');
 
 //Route::post('/profile', 'UserController@profile');
 //追加 プロフィール編集
