@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
-    <head><!--★-->
-    <meta charset="utf-8" />
+    <head>
+    <meta charset="utf-8"><!--<meta charset="utf-8" />--><!--★-->
     <!--IEブラウザ対策-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="ページの内容を表す文章" />
-    <title></title>
+    <title>Atlas SNS</title>
     <link rel="stylesheet" href="{{ asset('css/reset.css') }} ">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"><!-- Bootstrap -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }} ">
@@ -27,35 +27,35 @@
 <body>
     <header>
 
-            <div id = "head">
-                <div class="header-wrapper">
-                <div class="header-logo"><h1><a href="/index"><img src="{{ asset('storage/atlas.png') }}"></a></h1></div>
-                    <div id=""></div>
-                        <div id=""></div>
+            <!-- ロゴ -->
+            <div id = "head"><!--いらないかも-->
+                <h1 class="header-logo"><a href="/index"><img src="{{ asset('storage/atlas.png') }}"></a></h1>
+                <div id=""></div><div id=""></div>
 
-                        <!-- ヘッダー右 -->
-                        <!-- <p>〇〇さん<img src="images/arrow.png"></p> ←ここでまとめておいたほうがいい可能性ある!?-->
+                    <!-- ヘッダー右 -->
+                    <div class="header-right">
+                        <!-- ログインユーザー -->
                         <?php $user = Auth::user(); ?>
-                        <div class="header-menu-name"><p>{{ $user->username }}さん</p></div>
+                        <div class="header-name">{{ $user->username }}さん</div>
 
-                        <!-- メニュー -->
+                        <!-- メニューjs -->
                         <div class="menu"></div>
                         <!--<span class="inn"></span>-->
-                        <!--V-->
-
-                        <nav>
-                        <ul">
-                        <li><a href="/index">ホーム</a></li>
-                        <li><a href="/profile">プロフィール</a></li>
-                        <li><a href="/logout">ログアウト</a></li>
-                        </ul>
-                        </nav>
+                            <nav>
+                            <ul>
+                            <li><a href="/index">ホーム</a></li>
+                            <li><a href="/profile">プロフィール</a></li>
+                            <li><a href="/logout">ログアウト</a></li>
+                            </ul>
+                            </nav>
                         <!-- /メニュー -->
 
-                        <div class="header-userimg"><img src="{{ asset('storage/'.Auth::user()->images) }}"></div>
-                        <!-- /ヘッダー右 -->
+                        <!--アイコン-->
+                        <div class="header-icon"><img src="{{ asset('storage/'.Auth::user()->images) }}"></div>
+
+                    </div>
+                    <!-- /ヘッダー右 -->
             </div>
-        </div>
     </header>
 
     <div id="row">
