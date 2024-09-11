@@ -3,17 +3,23 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Post extends Model
 {
+    // 投稿の秒を消す
+    protected $dates = [
+        'created_at'
+    ];
+
+    //
     protected $fillable=['post','user_id'];
     //public $fillable = ['user_id', 'post']; //書き込み可能[post] 必須項目 $guarded or $fillable
-    //★
 
     //リレーション
     public function user(){
         return $this->belongsTo('App\User');
-        }
+    }//★
 
     // 【投稿】
     // 一覧画面

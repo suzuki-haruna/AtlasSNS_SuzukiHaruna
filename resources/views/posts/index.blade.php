@@ -27,10 +27,10 @@
 </form> -->
 
 {!! Form::close() !!}
-</div><!--★-->
+</div>
 
 @foreach($posts as $post)
-<p>{{ $post->created_at }}</p>
+<p>{{ $post->created_at->format('Y-m-d H:i') }}</p>
 <p><img src="{{ asset('storage/'.$post->images) }}"></p>
 <p>名前：{{ $post->username }}</p>
 <p>投稿内容：{{ $post->post }}</p>
@@ -55,8 +55,8 @@
 <div class="modal js-modal">
     <div class="modal__bg js-modal-close"></div>
     <div class="modal__content">
-        <form action="/post/update" method="post"><!--URLの記述(/index/updateだけでもよい!?)と、送信方法を追記(GET?◎POST?)-->
-            <textarea name="upPost" class="modal_post" maxlength="150"></textarea><!--name属性を追記。ここは送るデータに名前を付けているだけなので、受け取る側(Controller側)と一致していればなんでも可--><!--編集したい投稿の内容を送っている-->
+        <form action="/post/update" method="post">
+            <textarea name="upPost" class="modal_post" maxlength="150" required></textarea><!--name属性を追記。ここは送るデータに名前を付けているだけなので、受け取る側(Controller側)と一致していればなんでも可--><!--編集したい投稿の内容を送っている--><!--★-->
             <input type="hidden" name="id" class="modal_id" value=""><!--name属性を追記。ここは送るデータに名前を付けているだけなので、受け取る側(Controller側)と一致していればなんでも可--><!--どの投稿を編集したいのかを特定するidを送っている-->
             <!--<input type="submit" value="更新">-->
             <button type="submit" class="btn btn-success pull-right"><img src="images/edit.png" alt="送信"></button>
