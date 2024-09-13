@@ -5,6 +5,10 @@ html {}
 
 body {}
 
+a {
+    text-decoration: none;
+}
+
 /* header */
 header {
     display: flex;
@@ -12,6 +16,7 @@ header {
     height: 100px;
     background: #186AC9;
     align-items: center;
+    padding: 30px;
 }
 
 /*justify-content: flex-end;*/
@@ -27,21 +32,22 @@ header {
 
 .header-right {
     margin-left: auto;
+    color: #fff;
+    font-size: 25px;
 }
 
 .header-name {
     display: inline-block;
-}
-
-
-.menu {
-    display: inline-block;
+    margin: 0px 10px;
 }
 
 .header-icon {
     display: inline-block;
 }
 
+.header-icon img {
+    height: 60px;
+}
 
 /* main content */
 #row {
@@ -53,20 +59,38 @@ header {
     flex: 0 0 80%;
 }
 
-#side-bar {
-    flex: 0 0 19%;
-    border-left: 1px solid #727272;
-}
-
 /* メニュー */
 nav {
     display: none;
+    position: absolute;
+    right: 0;
+    z-index: 1;
+    margin-top: 20px;
+    width: 330px;
+    text-align: center;
+}
+
+nav ul li {
+    border: 2px solid #00297e;
+}
+
+.nav-white {
+    background: #fff;
+    color: #959595;
+    padding: 30px;
+}
+
+.nav-navy {
+    background: #00297e;
+    color: #fff;
+    padding: 30px;
 }
 
 .menu {
-    color: #fff;
-    font-size: 25px;
+    display: inline-block;
+    margin: 0px 10px;
     font-weight: 800;
+    cursor: pointer;
 }
 
 .menu::before {
@@ -77,6 +101,22 @@ nav {
 .menu.active::before {
     /* 開いている時 */
     content: "∧";
+}
+
+/* サイド */
+#side-bar {
+    flex: 0 0 19%;
+    border-left: 2px solid #727272;
+    color: #2a2a2a;
+    font-weight: 800;
+}
+
+#confirm {
+    padding: 30px;
+}
+
+.follow-number {
+    padding-left: 10px;
 }
 
 /* 検索 */

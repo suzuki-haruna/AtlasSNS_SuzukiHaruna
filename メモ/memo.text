@@ -14,6 +14,14 @@ ID71/浜崎/ hamasaki@jp/hhhhhhhh
 80/ぶた/boo@jp/00000000
 yoho@jp/00000000
 
+https://qiita.com/kawa_matsu/items/607ccb742235ea04bf0c
+
+https://github.com/vytautashi/classifieds-board-in-laravel/issues/5
+https://qiita.com/keiswe/items/5075099fe51bb8ff33e2
+https://qiita.com/Hashimoto-Noriaki/items/b9c40f86c2a59728be0b
+https://www.math-joy-life.com/laravel-sqlstatehy000-1049/#google_vignette
+「ポート番号が正しくない」ポート番号の設定が合っているか確認。
+
 ◎投稿の編集にもバリデーションを付ける
 現状、バリデーションがついてないので、空で編集ボタン押すとエラーはきます。
 ◎投稿時間の秒数を消す

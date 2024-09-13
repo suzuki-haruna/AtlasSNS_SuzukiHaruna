@@ -28,7 +28,7 @@
     <header>
 
             <!-- ロゴ -->
-            <div id = "head"><!--いらないかも-->
+            <!--<div id = "head">--><!--いらないかも-->
                 <h1 class="header-logo"><a href="/index"><img src="{{ asset('storage/atlas.png') }}"></a></h1>
                 <div id=""></div><div id=""></div>
 
@@ -36,16 +36,16 @@
                     <div class="header-right">
                         <!-- ログインユーザー -->
                         <?php $user = Auth::user(); ?>
-                        <div class="header-name">{{ $user->username }}さん</div>
+                        <div class="header-name">{{ $user->username }}　さん</div>
 
                         <!-- メニューjs -->
                         <div class="menu"></div>
                         <!--<span class="inn"></span>-->
                             <nav>
                             <ul>
-                            <li><a href="/index">ホーム</a></li>
-                            <li><a href="/profile">プロフィール</a></li>
-                            <li><a href="/logout">ログアウト</a></li>
+                            <a href="/index"><li class="nav-white">HOME</li></a>
+                            <a href="/profile"><li class="nav-navy">プロフィール編集</li></a>
+                            <a href="/logout"><li class="nav-white">ログアウト</li></a>
                             </ul>
                             </nav>
                         <!-- /メニュー -->
@@ -55,7 +55,7 @@
 
                     </div>
                     <!-- /ヘッダー右 -->
-            </div>
+            <!--</div>-->
     </header>
 
     <div id="row">
@@ -63,22 +63,36 @@
             @yield('content')
         </div >
         <div id="side-bar">
+
             <div id="confirm">
                 <p>{{ $user->username }}さんの</p>
-                <div>
-                <p>フォロー数</p>
-                <p>{{ Auth::user()->followed()->count() }}名</p>
-                <p></p>
-                </div>
-                <p class="btn"><a href="/follow-list">フォローリスト</a></p>
+
+                <table>
+                <tr><td>フォロー数</td>
+                <td class="follow-number">{{ Auth::user()->followed()->count() }}人</td>
+                </tr>
+
+                <tr>
+                <td></td>
+                <td><a href="/follow-list" class="btn btn-primary">フォローリスト</a></td>
                 <!--{{url('follow-list')}}-->
-                <div>
-                <p>フォロワー数</p>
-                <p>{{ Auth::user()->following()->count() }}名</p>
-                </div>
-                <p class="btn"><a href="/follower-list">フォロワーリスト</a></p>
+                </tr>
+
+                <tr>
+                <td>フォロワー数</td>
+                <td class="follow-number">{{ Auth::user()->following()->count() }}人</td>
+                </tr>
+
+                <tr>
+                <td></td>
+                <td><a href="/follower-list" class="btn btn-primary">フォロワーリスト</a></td>
+                </tr>
+                </table>
+
             </div>
-            <p class="btn"><a href="/search">ユーザー検索</a></p>
+
+            <a href="/search" class="btn btn-primary">ユーザー検索</a>
+
         </div>
     </div>
 
