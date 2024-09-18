@@ -80,10 +80,9 @@ nav ul li {
     padding: 30px;
 }
 
-.nav-navy {
+.nav-white:hover {
     background: #00297e;
     color: #fff;
-    padding: 30px;
 }
 
 .menu {
@@ -112,16 +111,42 @@ nav ul li {
 }
 
 #confirm {
-    padding: 30px;
+    padding: 20px;
 }
 
 .follow-number {
-    padding-left: 10px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+}
+
+.follow-link {
+    padding-left: 30px;
+    padding-bottom: 20px;
+}
+
+.btn-primary {
+    background: #186AC9;
+    min-width: 140px;
+}
+
+.side-bottom {
+    text-align: center;
 }
 
 /* 検索 */
 .search {
     display: flex;
+}
+
+/* index */
+.container {
+    display: flex;
+    margin-left: 100px;
+}
+
+.post-form {
+    display: inline-block;
+    width: 800px;
 }
 
 /* Atlas投稿編集モーダル */

@@ -6,17 +6,16 @@
 
 <!-- 投稿の編集 -->
 <div class="container">
-
   {!! Form::open(['url' => 'index']) !!} <!-- indexに値を送る -->
   {{ Form::token() }}
 
-<img src="{{ asset('storage/'.Auth::user()->images) }}">
+  <img src="{{ asset('storage/'.Auth::user()->images) }}">
 
-<div class="post-form">
+  <div class="post-form">
   {{ Form::input('text', 'newPost', null, ['required', 'class' => 'form-control', 'placeholder' => '投稿内容を入力してください']) }}
-</div>
+  </div>
 
-<button type="submit" class="btn btn-success pull-right"><img src="images/post.png" alt="送信"></button>
+  <button type="submit" class="btn btn-success pull-right"><img src="images/post.png" alt="送信"></button>
 
 <!-- <form action="/index" method="POST">
 @csrf --> <!-- 送信されるデータを保護する -->

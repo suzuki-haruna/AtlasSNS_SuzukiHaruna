@@ -22,7 +22,7 @@
 @endif
 
 @foreach($user as $user)
-<p>{{ $user->created_at }}</p>
+<p>{{ $user->created_at->format('Y-m-d H:i') }}</p>
 <p><img src="{{ asset('storage/'.$user->images) }}"></p>
 <p>名前：{{ $user->username }}</p>
 <p>投稿内容：{{ $user->post }}</p>

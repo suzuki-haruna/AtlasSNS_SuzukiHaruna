@@ -44,7 +44,7 @@
                             <nav>
                             <ul>
                             <a href="/index"><li class="nav-white">HOME</li></a>
-                            <a href="/profile"><li class="nav-navy">プロフィール編集</li></a>
+                            <a href="/profile"><li class="nav-white">プロフィール編集</li></a>
                             <a href="/logout"><li class="nav-white">ログアウト</li></a>
                             </ul>
                             </nav>
@@ -74,7 +74,7 @@
 
                 <tr>
                 <td></td>
-                <td><a href="/follow-list" class="btn btn-primary">フォローリスト</a></td>
+                <td class="follow-link"><a href="/follow-list" class="btn btn-primary">フォローリスト</a></td>
                 <!--{{url('follow-list')}}-->
                 </tr>
 
@@ -85,13 +85,16 @@
 
                 <tr>
                 <td></td>
-                <td><a href="/follower-list" class="btn btn-primary">フォロワーリスト</a></td>
+                <td class="follow-link"><a href="/follower-list" class="btn btn-primary">フォロワーリスト</a></td>
                 </tr>
                 </table>
 
             </div>
 
+            <hr>
+            <div class="side-bottom">
             <a href="/search" class="btn btn-primary">ユーザー検索</a>
+            </div>
 
         </div>
     </div>
