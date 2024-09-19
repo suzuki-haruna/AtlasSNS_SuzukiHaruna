@@ -46,7 +46,7 @@ header {
 }
 
 .header-icon img {
-    height: 60px;
+    height: 50px;
 }
 
 /* main content */
@@ -138,15 +138,58 @@ nav ul li {
     display: flex;
 }
 
-/* index */
+/* 【index】 */
+/*投稿する*/
 .container {
     display: flex;
-    margin-left: 100px;
+    margin: 30px auto 30px 100px;
+}
+
+.container img {
+    height: 50px;
 }
 
 .post-form {
     display: inline-block;
     width: 800px;
+}
+
+.form-control {
+    border: none;
+    outline: none;
+    resize: none;
+    overflow: hidden;
+    font-size: 18px;
+}
+
+.form-control::placeholder {
+    color: #dcdcdc;
+}
+
+.post-btn {
+    align-self: flex-end;
+    border: none;
+    background: transparent;
+}
+
+.post-btn img {
+    height: 50px;
+    border-radius: 5px;
+}
+
+.post-hr {
+    height: 8px;
+    background-color: #a9a9a9;
+    border: none;
+}
+
+/*投稿*/
+.posts {
+    display: grid;
+}
+
+.kari {
+    width: 100px;
 }
 
 /* Atlas投稿編集モーダル */

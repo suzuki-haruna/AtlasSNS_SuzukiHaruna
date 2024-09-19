@@ -4,19 +4,20 @@
 
 <!-- 追加 -->
 
-<!-- 投稿の編集 -->
-<div class="container">
+<!-- 投稿する -->
   {!! Form::open(['url' => 'index']) !!} <!-- indexに値を送る -->
   {{ Form::token() }}
-
+<div class="container">
   <img src="{{ asset('storage/'.Auth::user()->images) }}">
 
   <div class="post-form">
-  {{ Form::input('text', 'newPost', null, ['required', 'class' => 'form-control', 'placeholder' => '投稿内容を入力してください']) }}
+  {{-- Form::input('text', 'newPost', null,['required', 'class' => 'form-control', 'placeholder' => '投稿内容を入力してください', 'rows' => '10']) --}}
+    {{ Form::textarea('newPost', null,['required', 'class' => 'form-control', 'placeholder' => '投稿内容を入力してください。', 'rows' => '4']) }}
   </div>
 
-  <button type="submit" class="btn btn-success pull-right"><img src="images/post.png" alt="送信"></button>
-
+  <button type="submit" class="post-btn"><img src="images/post.png" alt="送信"></button>
+  <!--btn btn-success pull-right-->
+</div>
 <!-- <form action="/index" method="POST">
 @csrf --> <!-- 送信されるデータを保護する -->
 <!--@method('PUT')-->
@@ -26,13 +27,18 @@
 </form> -->
 
 {!! Form::close() !!}
-</div>
+<hr class="post-hr">
 
+<!-- 投稿 -->
 @foreach($posts as $post)
-<p>{{ $post->created_at->format('Y-m-d H:i') }}</p>
-<p><img src="{{ asset('storage/'.$post->images) }}"></p>
-<p>名前：{{ $post->username }}</p>
-<p>投稿内容：{{ $post->post }}</p>
+<div class="posts">
+
+<img src="{{ asset('storage/'.$post->images) }}">
+<ul>
+<li>{{ $post->username }}</li>
+<li>{{ $post->post }}</li>
+</ul>
+{{ $post->created_at->format('Y-m-d H:i') }}
 
 @if ($post->user_id == Auth::user()->id)
 <!-- 投稿編集 -->
@@ -40,10 +46,13 @@
 <!--<button type="submit" class="btn btn-success pull-right"><img src="images/edit.png" alt="送信"></button>-->
 
 <!-- 削除 -->
+ <div class="kari">
 <button type="submit" class="btn btn-success pull-right"><a href="/index/{{$post->id}}/delete" onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')"><img src="images/trash.png" onMouseOver="this.src='images/trash-h.png'" onMouseOut="this.src='images/trash.png'" alt="削除"></a></button>
+</div>
 @else
 @endif
 
+</div>
 @endforeach
 
 <!-- モーダルの中身 -->
