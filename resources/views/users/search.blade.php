@@ -6,21 +6,27 @@
   <form action="/search" method="post">
            @csrf
            <input type="text" name="keyword" class="form" placeholder="ユーザー名">
-           <button type="submit" class="btn btn-success pull-right"><img src="images/search.png" alt="送信"></button>
+           <button type="submit" class="post-btn"><img src="images/search.png" alt="送信"></button>
+            <!--class="btn btn-success pull-right"-->
   </form>
+  <div class="keyword">
           @if(!empty($keyword)) <!-- もし、空ではなかったら。 --><!--★-->
-          検索したワード：{{ $keyword }}
+          検索ワード：{{ $keyword }}
           @else
           @endif
+    </div>
 </div>
+<hr class="post-hr">
 
 <!-- ユーザー一覧 -->
-        <table class="table table-hover">
+    <div class="search-user">
+    <table class="table">
+    <!--<table class="table table-hover">-->
             @foreach ($users as $user)
             @if ($user->id !== Auth::user()->id) <!-- 自分は表示しない -->
-            <tr>
-                <td><img src="{{ asset('storage/'.$user->images) }}"></td><!-- {{ $user->images }} --><!--{{ asset('storage/'.Auth::user()->images) }}-->
-                <td>{{ $user->username }}</td>
+            <tr class="table-user">
+                <td class="search-icon"><img src="{{ asset('storage/'.$user->images) }}"></td><!-- {{ $user->images }} --><!--{{ asset('storage/'.Auth::user()->images) }}-->
+                <td class="search-name">{{ $user->username }}</td>
 
                 <!-- フォロー -->
                 @if (Auth::user()->isFollowing($user->id))
@@ -31,10 +37,10 @@
                 </form>
                 @else
                 <form action="{{ route('follow', ['user'=> $user->id]) }}" method="POST">
-<!--{{ route('follow', $user->id) }}-->
+                <!--{{ route('follow', $user->id) }}-->
                 @csrf
                 <td><!--<input type="button" name="follow">-->
-                <button type="submit" class="btn btn-primary">フォローする</button></td>
+                <button type="submit" class="btn btn-info">フォローする</button></td>
                 </form>
 
                 @endif
@@ -42,7 +48,8 @@
             </tr>
             @endif
             @endforeach
-        </table>
+    </table>
+    </div>
 <!-- /ユーザー一覧 -->
 <!--ここのurl指定方法の考え方は投稿の編集機能と似ています。
 ただ編集機能はフォームファサードを使った書き方、今回は別の書き方で書いています。

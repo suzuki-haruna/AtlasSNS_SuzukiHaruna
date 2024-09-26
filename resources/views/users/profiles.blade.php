@@ -1,13 +1,17 @@
 @extends('layouts.login')
 
 @section('content')
-<h2>フォロープロフ用</h2>
 
-<p><img src="{{ asset('storage/'.$member->images) }}"></p>
-<p>ユーザー名：{{ $member->username }}</p>
-<p>自己紹介：{{ $member->bio }}</p>
+<div class="profiles">
+    <div class="profiles-icon"><img src="{{ asset('storage/'.$member->images) }}"></div>
 
-@if (Auth::user()->isFollowing($member->id))
+    <table class="profiles-user">
+    <tr><td class="profiles-table">ユーザー名</td><td class="profiles-table2">{{ $member->username }}</td></tr>
+    <tr><td class="profiles-table">自己紹介</td><td class="profiles-table2">{{ $member->bio }}</td></tr>
+    </table>
+
+    <div class="profiles-follow">
+    @if (Auth::user()->isFollowing($member->id))
                 <form action="{{ route('unfollow', ['user' => $member->id]) }}" method="POST">
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
@@ -19,13 +23,27 @@
                 <td><!--<input type="button" name="follow">-->
                 <button type="submit" class="btn btn-primary">フォローする</button></td>
                 </form>
-@endif
+    @endif
+    </div>
+</div>
+<hr class="post-hr">
 
 @foreach($user as $user)
-<p>{{ $user->created_at->format('Y-m-d H:i') }}</p>
-<p><img src="{{ asset('storage/'.$user->images) }}"></p>
-<p>名前：{{ $user->username }}</p>
-<p>投稿内容：{{ $user->post }}</p>
+<div class="posts">
+
+<img src="{{ asset('storage/'.$user->images) }}" class="posts-icon">
+
+<ul>
+<li><b>{{ $user->username }}</b></li>
+<li class="posts-post">{{ $user->post }}</li>
+</ul>
+
+<div class="posts-day">
+{{ $user->created_at->format('Y-m-d H:i') }}
+</div>
+
+</div>
+<hr>
 @endforeach
 <!--★-->
 

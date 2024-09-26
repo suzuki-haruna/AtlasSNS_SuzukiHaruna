@@ -33,26 +33,31 @@
 @foreach($posts as $post)
 <div class="posts">
 
-<img src="{{ asset('storage/'.$post->images) }}">
+<img src="{{ asset('storage/'.$post->images) }}" class="posts-icon">
+
 <ul>
-<li>{{ $post->username }}</li>
-<li>{{ $post->post }}</li>
+<li><b>{{ $post->username }}</b></li>
+<li class="posts-post">{{ $post->post }}</li>
 </ul>
+
+<div class="posts-day">
 {{ $post->created_at->format('Y-m-d H:i') }}
+</div>
 
 @if ($post->user_id == Auth::user()->id)
+<div class="posts-edit">
 <!-- 投稿編集 -->
 <a class="js-modal-open" href="" post="{{ $post->post }}" post_id="{{ $post->id }}"><img src="images/edit.png" alt="編集"></a>
 <!--<button type="submit" class="btn btn-success pull-right"><img src="images/edit.png" alt="送信"></button>-->
 
 <!-- 削除 -->
- <div class="kari">
-<button type="submit" class="btn btn-success pull-right"><a href="/index/{{$post->id}}/delete" onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')"><img src="images/trash.png" onMouseOver="this.src='images/trash-h.png'" onMouseOut="this.src='images/trash.png'" alt="削除"></a></button>
+<button type="submit" class="btn"><a href="/index/{{$post->id}}/delete" class="modal-delete" onclick="return confirm('この投稿を削除します。よろしいでしょうか？')"><img src="images/trash.png" onMouseOver="this.src='images/trash-h.png'" onMouseOut="this.src='images/trash.png'" alt="削除"></a></button>
 </div>
 @else
 @endif
 
 </div>
+<hr>
 @endforeach
 
 <!-- モーダルの中身 -->
@@ -67,8 +72,10 @@
             <textarea name="upPost" class="modal_post" maxlength="150" required></textarea><!--name属性を追記。ここは送るデータに名前を付けているだけなので、受け取る側(Controller側)と一致していればなんでも可--><!--編集したい投稿の内容を送っている--><!--★-->
             <input type="hidden" name="id" class="modal_id" value=""><!--name属性を追記。ここは送るデータに名前を付けているだけなので、受け取る側(Controller側)と一致していればなんでも可--><!--どの投稿を編集したいのかを特定するidを送っている-->
             <!--<input type="submit" value="更新">-->
-            <button type="submit" class="btn btn-success pull-right"><img src="images/edit.png" alt="送信"></button>
+            <div  class="modal-btn">
+            <button type="submit" class="btn"><img src="images/edit.png" alt="送信"></button>
             {{ csrf_field() }}
+            </div>
         </form>
         <!--<a class="js-modal-close" href="">閉じる</a>-->
     </div>

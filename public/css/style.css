@@ -129,6 +129,21 @@ nav ul li {
     min-width: 140px;
 }
 
+.btn-danger {
+    min-width: 140px;
+}
+
+.btn-info {
+    background: #52acff;
+    color: #fff;
+    min-width: 140px;
+}
+
+.btn-info:hover {
+    cursor: pointer;
+    color: #fff;
+}
+
 .side-bottom {
     text-align: center;
 }
@@ -136,6 +151,58 @@ nav ul li {
 /* 検索 */
 .search {
     display: flex;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: 50px;
+}
+
+.form {
+    height: 50px;
+    width: 300px;
+    border: solid #959595;
+    border-radius: 5px;
+    font-size: 18px;
+    margin-right: 10px;
+    padding: 0;
+}
+
+.form::placeholder {
+    color: #959595;
+    padding-left: 20px;
+}
+
+.keyword {
+    padding-left: 250px;
+    font-size: 26px;
+    font-weight: 400;
+}
+
+.search-user {
+    margin-left: 25%;
+}
+
+.table {
+    width: 600px;
+    border: #fff;
+}
+
+.table tr td {
+    padding-bottom: 30px;
+}
+
+.search-icon {
+    width: 100px;
+}
+
+.search-icon img {
+    height: 50px;
+}
+
+.search-name {
+    width: 300px;
+    font-size: 22px;
+    font-weight: 400;
 }
 
 /* 【index】 */
@@ -186,10 +253,50 @@ nav ul li {
 /*投稿*/
 .posts {
     display: grid;
+    grid-template-columns: 1fr 800px 1fr;
 }
 
-.kari {
-    width: 100px;
+.posts img {
+    height: 50px;
+    margin-left: auto;
+}
+
+.posts a {
+    margin-left: auto;
+}
+
+.posts-icon {
+    grid-column: 1;
+    grid-row: 1 / 2;
+}
+
+.posts ul li {
+    grid-column: 2;
+    grid-row: 1 / 2;
+}
+
+.posts-post {
+    font-size: 14px;
+}
+
+.posts-day {
+    grid-column: 3;
+    grid-row: 1;
+    margin-left: auto;
+    margin-right: 30px;
+    font-size: 14px;
+}
+
+.posts-edit {
+    grid-column: 3;
+    grid-row: 2;
+    margin-left: auto;
+    margin-right: 30px;
+}
+
+.posts-edit img {
+    height: 40px;
+    border-radius: 5px;
 }
 
 /* Atlas投稿編集モーダル */
@@ -207,7 +314,7 @@ nav ul li {
 }
 
 .modal__bg {
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.4);
     height: 100vh;
     position: absolute;
     width: 100%;
@@ -221,4 +328,155 @@ nav ul li {
     top: 50%;
     transform: translate(-50%, -50%);
     width: 60%;
+    border-radius: 10px;
+}
+
+.modal_post {
+    height: 200px;
+    width: 100%;
+    padding: 1em;
+    resize: none;
+    border-radius: 0px;
+    margin-bottom: 20px;
+}
+
+.modal-btn {
+    text-align: center;
+}
+
+.modal-btn img {
+    display: block;
+    height: 40px;
+}
+
+.m {
+    background: #52acff;
+}
+
+/* フォローリスト */
+.follow-list {
+    display: flex;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.follow-list h2 {
+    width: 300px;
+    padding-left: 100px;
+    /*text-align: right;
+    padding-right: 1em;*/
+    font-weight: 400;
+}
+
+.follow-list img {
+    height: 50px;
+}
+
+.follow-list-user {
+    max-width: 600px;
+}
+
+.follow-list-user img {
+    margin: 0 5px 5px 0;
+}
+
+/* プロフィール編集 */
+.profile-Wrapper {}
+
+.profile {
+    margin: 50px auto;
+}
+
+.profile-icon {
+    text-align: right;
+    padding-right: 30px;
+}
+
+.profile-icon img {
+    height: 50px;
+}
+
+.profile-label {
+    width: 300px;
+    padding-bottom: 50px;
+    font-size: 24px;
+    font-weight: 400;
+    vertical-align: top;
+}
+
+.input {
+    height: 40px;
+    width: 400px;
+    background-color: #efefef;
+    border: solid #959595 1px;
+    font-size: 20px;
+    padding-left: 0.5em;
+}
+
+.icon-Registration {
+    display: none;
+}
+
+.control-label2>.icon-Registration {
+    display: none;
+}
+
+.control-label2 {
+    background-color: #fff;
+    /*height: 100px;
+    width: 400px;*/
+    color: #959595;
+    font-size: 20px;
+    padding: 0 1em;
+    margin-bottom: 10px;
+}
+
+.profile-label3 {
+    background-color: #efefef;
+    border: solid #959595 1px;
+    text-align: center;
+    padding: 5%;
+}
+
+.prv {
+    display: block;
+    margin: auto;
+}
+
+.profile-footer {
+    padding-top: 50px;
+    padding-left: 50%;
+}
+
+/* 他ユーザーのプロフ */
+.profiles {
+    display: flex;
+    margin: 30px auto;
+}
+
+.profiles-icon {
+    padding: 0 30px 0 100px;
+}
+
+
+.profiles-icon img {
+    height: 50px;
+}
+
+.profiles-user {}
+
+.profiles-table {
+    width: 180px;
+    padding-bottom: 25px;
+    font-size: 20px;
+}
+
+.profiles-table2 {
+    padding-right: 30px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.profiles-follow {
+    margin: auto 10px 0 auto;
 }

@@ -14,6 +14,8 @@ ID71/浜崎/ hamasaki@jp/hhhhhhhh
 80/ぶた/boo@jp/00000000
 yoho@jp/00000000
 upa@jp/00000000
+sake@jp/00000000
+banana@jp/00000000
 
 https://qiita.com/kawa_matsu/items/607ccb742235ea04bf0c
 
@@ -229,3 +231,6 @@ class FollowsController extends Controller
 緑川塾
 ■カメラオフOK!?
 □16:00〜20:00→4時間(その中から数十分)
+
+index：削除モーダル
+https://jp-seemore.com/web/28568/
