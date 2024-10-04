@@ -29,9 +29,9 @@
 
             <!-- ロゴ -->
             <!--<div id = "head">-->
-                <h1 class="header-logo"><a href="/index"><img src="images/atlas.png"></a></h1>
+                <h1 class="header-logo"><a href="/index"><img src="{{ asset('images/atlas.png') }}"></a></h1>
+                <!-- <h1 class="header-logo"><a href="/index"><img src="images/atlas.png"></a></h1> -->
                 {{-- <h1 class="header-logo"><a href="/index"><img src="{{ asset('storage/atlas.png') }}"></a></h1> --}}
-                <div id=""></div>
 
                     <!-- ヘッダー右 -->
                     <div class="header-right">
