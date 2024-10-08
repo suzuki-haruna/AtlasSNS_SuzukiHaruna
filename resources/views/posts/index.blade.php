@@ -16,8 +16,7 @@
   </div>
 
   <button type="submit" class="post-btn"><img src="images/post.png" alt="送信"></button>
-  <!--btn btn-success pull-right-->
-</div>
+</div><!--☆-->
 <!-- <form action="/index" method="POST">
 @csrf --> <!-- 送信されるデータを保護する -->
 <!--@method('PUT')-->

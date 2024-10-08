@@ -277,6 +277,7 @@ nav ul li {
 
 .posts-post {
     font-size: 14px;
+    white-space: pre-wrap;
 }
 
 .posts-day {
