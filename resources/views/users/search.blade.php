@@ -25,7 +25,7 @@
             @foreach ($users as $user)
             @if ($user->id !== Auth::user()->id) <!-- 自分は表示しない -->
             <tr class="table-user">
-                <td class="search-icon"><img src="{{ asset('storage/'.$user->images) }}"></td><!-- {{ $user->images }} --><!--{{ asset('storage/'.Auth::user()->images) }}-->
+                <td class="search-icon"><img src="{{ asset('storage/'.$user->images) }}" onerror="this.onerror=null; this.src='{{asset('/images/icon1.png')}}';"></td><!-- {{ $user->images }} --><!--{{ asset('storage/'.Auth::user()->images) }}-->
                 <td class="search-name">{{ $user->username }}</td>
 
                 <!-- フォロー -->

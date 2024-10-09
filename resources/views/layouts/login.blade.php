@@ -52,7 +52,7 @@
                         <!-- /メニュー -->
 
                         <!--アイコン-->
-                        <div class="header-icon"><img src="{{ asset('storage/'.Auth::user()->images) }}"></div>
+                        <div class="header-icon"><img src="{{ asset('storage/'.Auth::user()->images) }}" onerror="this.onerror=null; this.src='{{asset('/images/icon1.png')}}';"></div>
 
                     </div>
                     <!-- /ヘッダー右 -->

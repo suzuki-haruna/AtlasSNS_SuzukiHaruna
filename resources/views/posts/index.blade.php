@@ -8,7 +8,7 @@
   {!! Form::open(['url' => 'index']) !!} <!-- indexに値を送る -->
   {{ Form::token() }}
 <div class="container">
-  <img src="{{ asset('storage/'.Auth::user()->images) }}">
+  <img src="{{ asset('storage/'.Auth::user()->images) }}" onerror="this.onerror=null; this.src='{{asset('/images/icon1.png')}}';">
 
   <div class="post-form">
   {{-- Form::input('text', 'newPost', null,['required', 'class' => 'form-control', 'placeholder' => '投稿内容を入力してください', 'rows' => '10']) --}}
