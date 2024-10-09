@@ -18,13 +18,6 @@ header {
     padding: 30px;
 }
 
-/*justify-content: flex-end;*/
-/*flex-direction: row;*/
-
-.header-logo {
-    /*margin-right: auto;*/
-}
-
 .header-logo img {
     height: 50px;
 }
